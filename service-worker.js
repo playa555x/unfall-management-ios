@@ -5,18 +5,18 @@ const DYNAMIC_CACHE = 'dynamic-v1.2.0';
 
 // URLs für statisches Caching
 const staticAssets = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  '/unfall-management-ios/',
+  '/unfall-management-ios/index.html',
+  '/unfall-management-ios/manifest.json',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap'
 ];
 
 // URLs für dynamisches Caching
 const dynamicAssets = [
   'https://fonts.gstatic.com/',
-  '/apple-touch-icon',
-  '/icon-',
-  '/splash-'
+  '/unfall-management-ios/apple-touch-icon',
+  '/unfall-management-ios/icon-',
+  '/unfall-management-ios/splash-'
 ];
 
 // iOS-spezifische Cache-Strategien
