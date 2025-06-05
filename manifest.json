@@ -1,0 +1,175 @@
+{
+  "name": "Unfall-Management-System",
+  "short_name": "Unfall-Manager",
+  "description": "Komplettes System für Unfallschadensabwicklung und -verwaltung - iPhone optimiert",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "de",
+  "categories": ["productivity", "medical", "business", "utilities"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiB2aWV3Qm94PSIwIDAgMTkyIDE5MiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNjY3ZWVhIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM4YjVjZjYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmMDkzZmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgZmlsbD0idXJsKCNncmFkKSIgcng9IjQwIi8+PGNpcmNsZSBjeD0iOTYiIGN5PSI3NiIgcj0iMjQiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz48cmVjdCB4PSI4NCIgeT0iNjQiIHdpZHRoPSIyNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZjU5ZTBiIiByeD0iMiIvPjxyZWN0IHg9Ijg0IiB5PSI4NCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmNTllMGIiIHJ4PSIyIi8+PHJlY3QgeD0iOTQiIHk9Ijc0IiB3aWR0aD0iNCIgaGVpZ2h0PSIyNCIgZmlsbD0iI2Y1OWUwYiIgcng9IjIiLz48dGV4dCB4PSI5NiIgeT0iMTQwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VW5mYWxsPC90ZXh0Pjx0ZXh0IHg9Ijk2IiB5PSIxNTgiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk1hbmFnZXI8L3RleHQ+PC9zdmc+",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNjY3ZWVhIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM4YjVjZjYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmMDkzZmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0idXJsKCNncmFkKSIgcng9IjEwMCIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjIwMCIgcj0iNjQiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz48cmVjdCB4PSIyMjQiIHk9IjE2OCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjEyIiBmaWxsPSIjZjU5ZTBiIiByeD0iNiIvPjxyZWN0IHg9IjIyNCIgeT0iMjIwIiB3aWR0aD0iNjQiIGhlaWdodD0iMTIiIGZpbGw9IiNmNTllMGIiIHJ4PSI2Ii8+PHJlY3QgeD0iMjUwIiB5PSIxOTQiIHdpZHRoPSIxMiIgaGVpZ2h0PSI2NCIgZmlsbD0iI2Y1OWUwYiIgcng9IjYiLz48dGV4dCB4PSIyNTYiIHk9IjM0MCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0OCIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlVuZmFsbDwvdGV4dD48dGV4dCB4PSIyNTYiIHk9IjM4MCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIzNiIgZm9udC13ZWlnaHQ9IjQwMCIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TWFuYWdlcjwvdGV4dD48L3N2Zz4=",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-114x114.png",
+      "sizes": "114x114",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-76x76.png",
+      "sizes": "76x76",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-60x60.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-57x57.png",
+      "sizes": "57x57",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MTQiIGhlaWdodD0iODk2IiB2aWV3Qm94PSIwIDAgNDE0IDg5NiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzY2N2VlYSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNzY0YmEyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZjA5M2ZiIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQxNCIgaGVpZ2h0PSI4OTYiIGZpbGw9InVybCgjYmcpIi8+PHJlY3QgeD0iMjAiIHk9IjgwIiB3aWR0aD0iMzc0IiBoZWlnaHQ9IjEyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiByeD0iMzAiLz48dGV4dCB4PSIyMDciIHk9IjEzMCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfj6UgVW5mYWxsLU1hbmFnZW1lbnQtU3lzdGVtPC90ZXh0Pjx0ZXh0IHg9IjIwNyIgeT0iMTUwIiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Qcm9mZXNzaW9uZWxsZSBVbmZhbGxzY2hhZGVuc2Fid2lja2x1bmc8L3RleHQ+PHJlY3QgeD0iMjAiIHk9IjIyMCIgd2lkdGg9IjM3NCIgaGVpZ2h0PSI2MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiByeD0iMjAiLz48dGV4dCB4PSI2MCIgeT0iMjQ1IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+4pyFIENoZWNrbGlzdGU8L3RleHQ+PHRleHQgeD0iMTQwIiB5PSIyNDUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn5ONIFR1Z2VidWNoPC90ZXh0Pjx0ZXh0IHg9IjIyMCIgeT0iMjQ1IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+PpCBEb2t1bWVudGU8L3RleHQ+PHRleHQgeD0iMzAwIiB5PSIyNDUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn5OeIEtvbnRha3RlPC90ZXh0Pjx0ZXh0IHg9IjM1NCIgeT0iMjQ1IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+4o+xvuKPuCBUaW1lbGluZTwvdGV4dD48cmVjdCB4PSIyMCIgeT0iMzAwIiB3aWR0aD0iMzc0IiBoZWlnaHQ9IjE4MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiByeD0iMjUiLz48dGV4dCB4PSI0MCIgeT0iMzI1IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSJ3aGl0ZSI+8J+agiBTb2ZvcnRtYcOfbmFobWVuPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSIzNDUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiPuKcheKAgyBVbmZhbGxzdGVsbGUgYWJzaWNoZXJuPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSIzNjAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiPuKcheKAgyBFcnN0ZSBIaWxmZSBsZWlzdGVuPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSIzNzUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiPuKcheKAgyBGb3RvcyBtYWNoZW48L3RleHQ+PHRleHQgeD0iNDAiIHk9IjM5MCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+4pyF4oCjIFZlcnNpY2hlcnVuZyBpbmZvcm1pZXJlbjwvdGV4dD48cmVjdCB4PSIyMCIgeT0iNTAwIiB3aWR0aD0iMzc0IiBoZWlnaHQ9IjQwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIHJ4PSIxNSIvPjxyZWN0IHg9IjIwIiB5PSI1MDAiIHdpZHRoPSIxNTAiIGhlaWdodD0iNDAiIGZpbGw9IiM2MzY2ZjEiIHJ4PSIxNSIvPjx0ZXh0IHg9IjIwNyIgeT0iNTI1IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+NDAlPC90ZXh0Pjwvc3ZnPg==",
+      "sizes": "414x896",
+      "type": "image/svg+xml",
+      "form_factor": "narrow",
+      "label": "iPhone Screenshot"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4OTYiIGhlaWdodD0iNDE0IiB2aWV3Qm94PSIwIDAgODk2IDQxNCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzY2N2VlYSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNzY0YmEyIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZjA5M2ZiIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9Ijg5NiIgaGVpZ2h0PSI0MTQiIGZpbGw9InVybCgjYmcpIi8+PHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iODE2IiBoZWlnaHQ9IjgwIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIHJ4PSIyMCIvPjx0ZXh0IHg9IjQ0OCIgeT0iNzAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn4+lIFVuZmFsbC1NYW5hZ2VtZW50LVN5c3RlbTwvdGV4dD48dGV4dCB4PSI0NDgiIHk9Ijg4IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Qcm9mZXNzaW9uZWxsZSBVbmZhbGxzY2hhZGVuc2Fid2lja2x1bmc8L3RleHQ+PHJlY3QgeD0iNDAiIHk9IjE0MCIgd2lkdGg9IjgxNiIgaGVpZ2h0PSI1MCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIiByeD0iMjAiLz48dGV4dCB4PSIxMDAiIHk9IjE2OCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPuKchSBDaGVja2xpc3RlPC90ZXh0Pjx0ZXh0IHg9IjI1MCIgeT0iMTY4IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TjSBUYWdlYnVjaDwvdGV4dD48dGV4dCB4PSI0MDAiIHk9IjE2OCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfj6QgRG9rdW1lbnRlPC90ZXh0Pjx0ZXh0IHg9IjU1MCIgeT0iMTY4IiBmb250LWZhbWlseT0iLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TniBLb250YWt0ZTwvdGV4dD48dGV4dCB4PSI3MDAiIHk9IjE2OCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPuKPsb7ij7ggVGltZWxpbmU8L3RleHQ+PHJlY3QgeD0iNDAiIHk9IjIyMCIgd2lkdGg9IjQwMCIgaGVpZ2h0PSIxNDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIgcng9IjI1Ii8+PHRleHQgeD0iNjAiIHk9IjI0NSIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiPvCfmqIgU29mb3J0bWHDn25haG1lbjwvdGV4dD48cmVjdCB4PSI0NjAiIHk9IjIyMCIgd2lkdGg9IjM5NiIgaGVpZ2h0PSIxNDAiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIgcng9IjI1Ii8+PHRleHQgeD0iNDgwIiB5PSIyNDUiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IndoaXRlIj7wn5ONIEV1cm9ww6Rpc2NoZXIgVW5mYWxsYmVyaWNodDwvdGV4dD48L3N2Zz4=",
+      "sizes": "896x414",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "iPhone Landscape Screenshot"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Neuer Tagebucheintrag",
+      "short_name": "Tagebuch",
+      "description": "Schnell einen neuen Tagebucheintrag erstellen",
+      "url": "/?tab=diary",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiB2aWV3Qm94PSIwIDAgMTkyIDE5MiI+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE3MiIgZmlsbD0iIzEwYjk4MSIgcng9IjIwIi8+PHRleHQgeD0iOTYiIHk9IjEyMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjcwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+TnTwvdGV4dD48L3N2Zz4=",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Checkliste",
+      "short_name": "TODO",
+      "description": "Fortschritt und Aufgaben überprüfen",
+      "url": "/?tab=checklist",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiB2aWV3Qm94PSIwIDAgMTkyIDE5MiI+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE3MiIgZmlsbD0iIzZmNzFmMSIgcng9IjIwIi8+PHRleHQgeD0iOTYiIHk9IjEyMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjcwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+4pyFPC90ZXh0Pjwvc3ZnPg==",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Notfall-Kontakte",
+      "short_name": "Notfall",
+      "description": "Schnellzugriff auf wichtige Kontakte",
+      "url": "/?tab=contacts",
+      "icons": [
+        {
+          "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiB2aWV3Qm94PSIwIDAgMTkyIDE5MiI+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE3MiIgZmlsbD0iI2VmNDQ0NCIgcng9IjIwIi8+PHRleHQgeD0iOTYiIHk9IjEyMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjcwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+8J+agDwvdGV4dD48L3N2Zz4=",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "text/plain": [".txt"],
+        "application/json": [".json"],
+        "image/*": [".jpg", ".jpeg", ".png", ".gif"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+unfallmanager",
+      "url": "/?handler=%s"
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 480
+  },
+  "related_applications": [],
+  "iarc_rating_id": "",
+  "dir": "ltr",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}
+

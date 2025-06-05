@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Unfall-Management-System</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS-optimierte Meta-Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Unfall-Manager">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- iOS Splash Screens -->
+    <link rel="apple-touch-startup-image" href="splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    
+    <!-- Icons für verschiedene Geräte -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #06b6d4;
+            --accent: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+            
+            /* iOS-spezifische Variablen */
+            --safe-area-inset-top: env(safe-area-inset-top);
+            --safe-area-inset-right: env(safe-area-inset-right);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+            --safe-area-inset-left: env(safe-area-inset-left);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Erlaubt Textauswahl für bestimmte Elemente */
+        input, textarea, .selectable {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            overscroll-behavior: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            
+            /* iOS Safe Area Support */
+            padding-top: var(--safe-area-inset-top);
+            padding-right: var(--safe-area-inset-right);
+            padding-bottom: var(--safe-area-inset-bottom);
+            padding-left: var(--safe-area-inset-left);
+        }
+
+        /* iOS Scroll-Verhalten */
+        body, .container, .tab-content {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.3) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            padding-top: max(20px, var(--safe-area-inset-top, 20px));
+            padding-bottom: max(20px, var(--safe-area-inset-bottom, 20px));
+            padding-left: max(20px, var(--safe-area-inset-left, 20px));
+            padding-right: max(20px, var(--safe-area-inset-right, 20px));
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            animation: slideInFromTop 0.8s ease-out;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header h1 {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* iOS Install Banner */
+        .install-banner {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            display: none;
+            position: relative;
+        }
+
+        .install-banner.show {
+            display: block;
+            animation: slideInFromTop 0.5s ease-out;
+        }
+
+        .install-banner button {
+            background: white;
+            color: var(--success);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 10px;
+            cursor: pointer;
+            touch-action: manipulation;
+            min-height: 44px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .install-banner button:active {
+            transform: scale(0.95);
+            background: #f0f0f0;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 12px;
+            box-shadow: var(--shadow);
+            animation: slideInFromLeft 0.8s ease-out 0.2s both;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .nav-tab {
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1;
+            min-width: 100px;
+            color: white;
+            font-weight: 500;
+            font-size: 0.85rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            white-space: nowrap;
+            touch-action: manipulation;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-tab:active::before {
+            left: 100%;
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav-tab:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px) scale(0.98);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        }
+
+        .card:active {
+            transform: translateY(-3px) scale(0.98);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .card h3 {
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .card h3::before {
+            content: '';
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .checklist {
+            list-style: none;
+        }
+        
+        .checklist li {
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 44px;
+        }
+
+        .checklist li:active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(3px) scale(0.98);
+        }
+        
+        .checklist input[type="checkbox"] {
+            margin-top: 4px;
+            transform: scale(1.3);
+            accent-color: var(--primary);
+            min-width: 22px;
+            min-height: 22px;
+            cursor: pointer;
+        }
+        
+        .checklist label {
+            cursor: pointer;
+            flex: 1;
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            -webkit-user-select: text;
+            user-select: text;
+        }
+        
+        .checklist .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+            color: var(--success);
+        }
+        
+        .priority-high {
+            border-left: 6px solid var(--danger);
+            background: rgba(239, 68, 68, 0.05);
+        }
+        
+        .priority-medium {
+            border-left: 6px solid var(--warning);
+            background: rgba(245, 158, 11, 0.05);
+        }
+        
+        .priority-low {
+            border-left: 6px solid var(--success);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+            touch-action: manipulation;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:active::before {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+            box-shadow: 0 6px 20px rgba(107, 114, 128, 0.3);
+        }
+
+        .btn-secondary:active {
+            box-shadow: 0 8px 20px rgba(107, 114, 128, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger) 0%, #f97316 100%);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:active {
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .export-btn:active {
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            height: 28px;
+            margin: 25px 0;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            height: 100%;
+            transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* iOS-spezifische Eingabefelder */
+        input, textarea, select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            min-height: 44px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design für iPhone */
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 30px 15px;
+                margin-bottom: 30px;
+            }
+            
+            .nav-tabs {
+                gap: 6px;
+                padding: 10px;
+                flex-wrap: nowrap;
+            }
+            
+            .nav-tab {
+                padding: 12px 14px;
+                font-size: 0.8rem;
+                min-width: 80px;
+            }
+            
+            .card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .checklist li {
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+        }
+
+        /* iPhone X und neuere Modelle */
+        @media screen and (max-width: 414px) and (min-height: 812px) {
+            body {
+                padding-top: max(var(--safe-area-inset-top, 44px), 44px);
+                padding-bottom: max(var(--safe-area-inset-bottom, 34px), 34px);
+            }
+        }
+
+        /* Landscape-Modus für iPhone */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .nav-tabs {
+                margin-bottom: 20px;
+            }
+            
+            .card {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --glass: rgba(255, 255, 255, 0.08);
+                --glass-border: rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            .card, .nav-tab, .btn {
+                border-width: 2px;
+            }
+        }
+
+        /* Haptic Feedback Simulation */
+        .haptic-light:active {
+            animation: hapticLight 0.1s ease-out;
+        }
+
+        .haptic-medium:active {
+            animation: hapticMedium 0.15s ease-out;
+        }
+
+        .haptic-heavy:active {
+            animation: hapticHeavy 0.2s ease-out;
+        }
+
+        @keyframes hapticLight {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.98); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes hapticMedium {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes hapticHeavy {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.92); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- iOS Install Banner -->
+        <div id="installBanner" class="install-banner">
+            <div>📱 Installiere die App auf deinem iPhone für die beste Erfahrung!</div>
+            <button onclick="showInstallInstructions()" class="haptic-medium">Installationsanleitung anzeigen</button>
+        </div>
+
+        <header class="header">
+            <h1>🏥 Unfall-Management-System</h1>
+            <p>Professionelle Unfallschadensabwicklung und -verwaltung</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <div class="nav-tab active haptic-light" onclick="showTab('checklist')">✅ Checkliste</div>
+            <div class="nav-tab haptic-light" onclick="showTab('diary')">📝 Tagebuch</div>
+            <div class="nav-tab haptic-light" onclick="showTab('documents')">📄 Dokumente</div>
+            <div class="nav-tab haptic-light" onclick="showTab('contacts')">📞 Kontakte</div>
+            <div class="nav-tab haptic-light" onclick="showTab('timeline')">⏱️ Timeline</div>
+        </nav>
+
+        <!-- Checkliste Tab -->
+        <div id="checklist" class="tab-content active">
+            <div class="card priority-high">
+                <h3>🚨 Sofortmaßnahmen (Erste 24h)</h3>
+                <ul class="checklist">
+                    <li>
+                        <input type="checkbox" id="emergency1" onchange="updateProgress()">
+                        <label for="emergency1">Unfallstelle absichern und Polizei/Rettung verständigen</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="emergency2" onchange="updateProgress()">
+                        <label for="emergency2">Erste Hilfe leisten (falls erforderlich)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="emergency3" onchange="updateProgress()">
+                        <label for="emergency3">Unfallbeteiligte und Zeugen identifizieren</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="emergency4" onchange="updateProgress()">
+                        <label for="emergency4">Fotos von Unfallstelle und Schäden machen</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="emergency5" onchange="updateProgress()">
+                        <label for="emergency5">Europäischen Unfallbericht ausfüllen</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="emergency6" onchange="updateProgress()">
+                        <label for="emergency6">Versicherung unverzüglich informieren</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card priority-medium">
+                <h3>📋 Dokumentation (Erste Woche)</h3>
+                <ul class="checklist">
+                    <li>
+                        <input type="checkbox" id="doc1" onchange="updateProgress()">
+                        <label for="doc1">Unfallhergang detailliert dokumentieren</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc2" onchange="updateProgress()">
+                        <label for="doc2">Alle Schäden fotografisch dokumentieren</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc3" onchange="updateProgress()">
+                        <label for="doc3">Kostenvoranschläge für Reparaturen einholen</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc4" onchange="updateProgress()">
+                        <label for="doc4">Ärztliche Untersuchung bei Personenschäden</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc5" onchange="updateProgress()">
+                        <label for="doc5">Arbeitsunfähigkeitsbescheinigung (falls nötig)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc6" onchange="updateProgress()">
+                        <label for="doc6">Verdienstausfall dokumentieren</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card priority-low">
+                <h3>⚖️ Rechtliche Schritte</h3>
+                <ul class="checklist">
+                    <li>
+                        <input type="checkbox" id="legal1" onchange="updateProgress()">
+                        <label for="legal1">Anwalt konsultieren (bei komplexen Fällen)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="legal2" onchange="updateProgress()">
+                        <label for="legal2">Schadenersatzansprüche prüfen</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="legal3" onchange="updateProgress()">
+                        <label for="legal3">Schmerzensgeld beantragen (bei Personenschäden)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="legal4" onchange="updateProgress()">
+                        <label for="legal4">Verjährungsfristen beachten</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%">0%</div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn export-btn haptic-medium" onclick="exportProgress()">📊 Fortschritt exportieren</button>
+                <button class="btn btn-secondary haptic-medium" onclick="resetProgress()" style="margin-left: 10px;">🔄 Zurücksetzen</button>
+            </div>
+        </div>
+
+        <!-- Tagebuch Tab -->
+        <div id="diary" class="tab-content">
+            <div class="card">
+                <h3>📝 Neuer Tagebucheintrag</h3>
+                <div style="margin-bottom: 15px;">
+                    <input type="date" id="entryDate" style="width: 100%; margin-bottom: 10px;">
+                    <input type="time" id="entryTime" style="width: 100%; margin-bottom: 10px;">
+                </div>
+                <textarea id="entryText" placeholder="Beschreibe hier deine Symptome, Schmerzen oder wichtige Ereignisse..." style="width: 100%; height: 120px; margin-bottom: 15px; resize: vertical;"></textarea>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn haptic-medium" onclick="addDiaryEntry()">💾 Eintrag speichern</button>
+                    <button class="btn btn-secondary haptic-light" onclick="clearDiaryForm()">🗑️ Leeren</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📖 Tagebucheinträge</h3>
+                <div id="diaryEntries">
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        Noch keine Einträge vorhanden. Erstelle deinen ersten Eintrag oben.
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn export-btn haptic-medium" onclick="exportDiary()">📤 Tagebuch exportieren</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dokumente Tab -->
+        <div id="documents" class="tab-content">
+            <div class="card">
+                <h3>📄 Wichtige Dokumente</h3>
+                <ul class="checklist">
+                    <li>
+                        <input type="checkbox" id="doc_unfallbericht">
+                        <label for="doc_unfallbericht">Europäischer Unfallbericht</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc_polizeibericht">
+                        <label for="doc_polizeibericht">Polizeibericht</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc_versicherung">
+                        <label for="doc_versicherung">Versicherungsschreiben</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc_kostenvoranschlag">
+                        <label for="doc_kostenvoranschlag">Kostenvoranschläge</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc_arztbericht">
+                        <label for="doc_arztbericht">Ärztliche Berichte</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc_arbeitsunfaehigkeit">
+                        <label for="doc_arbeitsunfaehigkeit">Arbeitsunfähigkeitsbescheinigung</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc_lohnabrechnung">
+                        <label for="doc_lohnabrechnung">Lohnabrechnungen</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="doc_fotos">
+                        <label for="doc_fotos">Unfallfotos</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>📋 Dokument-Checkliste</h3>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                    Stelle sicher, dass du alle wichtigen Dokumente gesammelt und sicher aufbewahrt hast.
+                </p>
+                <div style="text-align: center;">
+                    <button class="btn haptic-medium" onclick="generateDocumentList()">📋 Checkliste erstellen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kontakte Tab -->
+        <div id="contacts" class="tab-content">
+            <div class="card">
+                <h3>📞 Wichtige Kontakte</h3>
+                <div style="display: grid; gap: 15px;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                        <strong style="color: white;">🚨 Notruf</strong><br>
+                        <span style="color: rgba(255,255,255,0.8);">Polizei: 110 | Rettung: 112</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                        <strong style="color: white;">🏥 Meine Versicherung</strong><br>
+                        <input type="text" placeholder="Name der Versicherung" style="width: 100%; margin: 5px 0;">
+                        <input type="tel" placeholder="Telefonnummer" style="width: 100%; margin: 5px 0;">
+                        <input type="text" placeholder="Versicherungsnummer" style="width: 100%; margin: 5px 0;">
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                        <strong style="color: white;">⚖️ Mein Anwalt</strong><br>
+                        <input type="text" placeholder="Name des Anwalts" style="width: 100%; margin: 5px 0;">
+                        <input type="tel" placeholder="Telefonnummer" style="width: 100%; margin: 5px 0;">
+                        <input type="email" placeholder="E-Mail" style="width: 100%; margin: 5px 0;">
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                        <strong style="color: white;">🏥 Mein Arzt</strong><br>
+                        <input type="text" placeholder="Name des Arztes" style="width: 100%; margin: 5px 0;">
+                        <input type="tel" placeholder="Telefonnummer" style="width: 100%; margin: 5px 0;">
+                        <input type="text" placeholder="Adresse" style="width: 100%; margin: 5px 0;">
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn haptic-medium" onclick="saveContacts()">💾 Kontakte speichern</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Tab -->
+        <div id="timeline" class="tab-content">
+            <div class="card">
+                <h3>⏱️ Unfall-Timeline</h3>
+                <div id="timelineEntries">
+                    <div style="border-left: 3px solid var(--primary); padding-left: 20px; margin: 20px 0;">
+                        <div style="color: var(--primary); font-weight: 600; margin-bottom: 5px;">Tag 0 - Unfalltag</div>
+                        <div style="color: rgba(255,255,255,0.9);">
+                            • Unfall ereignet sich<br>
+                            • Sofortmaßnahmen einleiten<br>
+                            • Dokumentation beginnen
+                        </div>
+                    </div>
+                    <div style="border-left: 3px solid var(--warning); padding-left: 20px; margin: 20px 0;">
+                        <div style="color: var(--warning); font-weight: 600; margin-bottom: 5px;">Tag 1-7 - Erste Woche</div>
+                        <div style="color: rgba(255,255,255,0.9);">
+                            • Versicherung informieren<br>
+                            • Ärztliche Untersuchung<br>
+                            • Kostenvoranschläge einholen
+                        </div>
+                    </div>
+                    <div style="border-left: 3px solid var(--success); padding-left: 20px; margin: 20px 0;">
+                        <div style="color: var(--success); font-weight: 600; margin-bottom: 5px;">Woche 2-4 - Abwicklung</div>
+                        <div style="color: rgba(255,255,255,0.9);">
+                            • Schadenregulierung<br>
+                            • Reparaturen durchführen<br>
+                            • Nachbehandlung
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn haptic-medium" onclick="addTimelineEntry()">➕ Eintrag hinzufügen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Service Worker registrieren
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // iOS Install Banner
+        let deferredPrompt;
+        let isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        let isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+        if (isIOS && !isStandalone) {
+            document.getElementById('installBanner').classList.add('show');
+        }
+
+        // Install Instructions für iOS
+        function showInstallInstructions() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            alert(`📱 So installierst du die App auf deinem iPhone:
+
+1. Öffne diese Seite in Safari
+2. Tippe auf das Teilen-Symbol (⬆️) unten
+3. Scrolle nach unten und wähle "Zum Home-Bildschirm"
+4. Tippe auf "Hinzufügen"
+5. Die App erscheint auf deinem Home-Bildschirm
+
+Die App funktioniert dann auch offline! 🚀`);
+        }
+
+        // Tab Navigation
+        function showTab(tabName) {
+            // Haptic Feedback
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            // Alle Tabs verstecken
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Alle Nav-Tabs deaktivieren
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Gewählten Tab anzeigen
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Progress Tracking
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            const checked = document.querySelectorAll('#checklist input[type="checkbox"]:checked');
+            const progress = Math.round((checked.length / checkboxes.length) * 100);
+            
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = progress + '%';
+            progressFill.textContent = progress + '%';
+            
+            // Haptic Feedback bei Fortschritt
+            if (navigator.vibrate && checked.length > 0) {
+                navigator.vibrate(100);
+            }
+            
+            // Progress in localStorage speichern
+            const progressData = {};
+            checkboxes.forEach(checkbox => {
+                progressData[checkbox.id] = checkbox.checked;
+            });
+            localStorage.setItem('unfallProgress', JSON.stringify(progressData));
+        }
+
+        // Progress laden
+        function loadProgress() {
+            const saved = localStorage.getItem('unfallProgress');
+            if (saved) {
+                const progressData = JSON.parse(saved);
+                Object.keys(progressData).forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = progressData[id];
+                        if (progressData[id]) {
+                            checkbox.parentElement.classList.add('completed');
+                        }
+                    }
+                });
+                updateProgress();
+            }
+        }
+
+        // Progress exportieren
+        function exportProgress() {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
+            
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            const checked = document.querySelectorAll('#checklist input[type="checkbox"]:checked');
+            const progress = Math.round((checked.length / checkboxes.length) * 100);
+            
+            let report = `📊 Unfall-Management Fortschritt (${new Date().toLocaleDateString('de-DE')})\n\n`;
+            report += `Gesamtfortschritt: ${progress}% (${checked.length}/${checkboxes.length} Aufgaben)\n\n`;
+            
+            const sections = ['Sofortmaßnahmen', 'Dokumentation', 'Rechtliche Schritte'];
+            sections.forEach((section, index) => {
+                const sectionCheckboxes = document.querySelectorAll(`#checklist .card:nth-child(${index + 1}) input[type="checkbox"]`);
+                const sectionChecked = document.querySelectorAll(`#checklist .card:nth-child(${index + 1}) input[type="checkbox"]:checked`);
+                const sectionProgress = Math.round((sectionChecked.length / sectionCheckboxes.length) * 100);
+                
+                report += `${section}: ${sectionProgress}% (${sectionChecked.length}/${sectionCheckboxes.length})\n`;
+            });
+            
+            // Als Datei herunterladen
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `unfall-fortschritt-${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Progress zurücksetzen
+        function resetProgress() {
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            if (confirm('Möchtest du wirklich den gesamten Fortschritt zurücksetzen?')) {
+                document.querySelectorAll('#checklist input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                    checkbox.parentElement.classList.remove('completed');
+                });
+                localStorage.removeItem('unfallProgress');
+                updateProgress();
+            }
+        }
+
+        // Tagebuch Funktionen
+        function addDiaryEntry() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            const date = document.getElementById('entryDate').value;
+            const time = document.getElementById('entryTime').value;
+            const text = document.getElementById('entryText').value;
+            
+            if (!date || !text) {
+                alert('Bitte fülle mindestens Datum und Text aus.');
+                return;
+            }
+            
+            const entry = {
+                id: Date.now(),
+                date: date,
+                time: time || '00:00',
+                text: text,
+                timestamp: new Date().toISOString()
+            };
+            
+            let entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
+            entries.unshift(entry);
+            localStorage.setItem('diaryEntries', JSON.stringify(entries));
+            
+            displayDiaryEntries();
+            clearDiaryForm();
+        }
+
+        function displayDiaryEntries() {
+            const entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
+            const container = document.getElementById('diaryEntries');
+            
+            if (entries.length === 0) {
+                container.innerHTML = '<p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">Noch keine Einträge vorhanden. Erstelle deinen ersten Eintrag oben.</p>';
+                return;
+            }
+            
+            container.innerHTML = entries.map(entry => `
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <strong style="color: var(--primary);">${new Date(entry.date).toLocaleDateString('de-DE')} ${entry.time}</strong>
+                        <button onclick="deleteDiaryEntry(${entry.id})" style="background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 5px; font-size: 12px;">🗑️</button>
+                    </div>
+                    <div style="color: rgba(255,255,255,0.9); line-height: 1.5;" class="selectable">${entry.text}</div>
+                </div>
+            `).join('');
+        }
+
+        function deleteDiaryEntry(id) {
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            if (confirm('Möchtest du diesen Eintrag wirklich löschen?')) {
+                let entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
+                entries = entries.filter(entry => entry.id !== id);
+                localStorage.setItem('diaryEntries', JSON.stringify(entries));
+                displayDiaryEntries();
+            }
+        }
+
+        function clearDiaryForm() {
+            document.getElementById('entryDate').value = '';
+            document.getElementById('entryTime').value = '';
+            document.getElementById('entryText').value = '';
+        }
+
+        function exportDiary() {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
+            
+            const entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
+            if (entries.length === 0) {
+                alert('Keine Tagebucheinträge zum Exportieren vorhanden.');
+                return;
+            }
+            
+            let diary = `📖 Unfall-Tagebuch Export (${new Date().toLocaleDateString('de-DE')})\n\n`;
+            
+            entries.forEach(entry => {
+                diary += `Datum: ${new Date(entry.date).toLocaleDateString('de-DE')} ${entry.time}\n`;
+                diary += `${entry.text}\n\n---\n\n`;
+            });
+            
+            const blob = new Blob([diary], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `unfall-tagebuch-${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Kontakte speichern
+        function saveContacts() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            const contacts = {
+                insurance: {
+                    name: document.querySelector('input[placeholder="Name der Versicherung"]').value,
+                    phone: document.querySelector('input[placeholder="Telefonnummer"]').value,
+                    number: document.querySelector('input[placeholder="Versicherungsnummer"]').value
+                },
+                lawyer: {
+                    name: document.querySelector('input[placeholder="Name des Anwalts"]').value,
+                    phone: document.querySelectorAll('input[placeholder="Telefonnummer"]')[1].value,
+                    email: document.querySelector('input[placeholder="E-Mail"]').value
+                },
+                doctor: {
+                    name: document.querySelector('input[placeholder="Name des Arztes"]').value,
+                    phone: document.querySelectorAll('input[placeholder="Telefonnummer"]')[2].value,
+                    address: document.querySelector('input[placeholder="Adresse"]').value
+                }
+            };
+            
+            localStorage.setItem('contacts', JSON.stringify(contacts));
+            alert('Kontakte erfolgreich gespeichert! 💾');
+        }
+
+        // Kontakte laden
+        function loadContacts() {
+            const saved = localStorage.getItem('contacts');
+            if (saved) {
+                const contacts = JSON.parse(saved);
+                
+                if (contacts.insurance) {
+                    document.querySelector('input[placeholder="Name der Versicherung"]').value = contacts.insurance.name || '';
+                    document.querySelector('input[placeholder="Telefonnummer"]').value = contacts.insurance.phone || '';
+                    document.querySelector('input[placeholder="Versicherungsnummer"]').value = contacts.insurance.number || '';
+                }
+                
+                if (contacts.lawyer) {
+                    document.querySelector('input[placeholder="Name des Anwalts"]').value = contacts.lawyer.name || '';
+                    document.querySelectorAll('input[placeholder="Telefonnummer"]')[1].value = contacts.lawyer.phone || '';
+                    document.querySelector('input[placeholder="E-Mail"]').value = contacts.lawyer.email || '';
+                }
+                
+                if (contacts.doctor) {
+                    document.querySelector('input[placeholder="Name des Arztes"]').value = contacts.doctor.name || '';
+                    document.querySelectorAll('input[placeholder="Telefonnummer"]')[2].value = contacts.doctor.phone || '';
+                    document.querySelector('input[placeholder="Adresse"]').value = contacts.doctor.address || '';
+                }
+            }
+        }
+
+        // Timeline Eintrag hinzufügen
+        function addTimelineEntry() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            const date = prompt('Datum (TT.MM.JJJJ):');
+            const description = prompt('Beschreibung:');
+            
+            if (date && description) {
+                const container = document.getElementById('timelineEntries');
+                const newEntry = document.createElement('div');
+                newEntry.style.cssText = 'border-left: 3px solid var(--accent); padding-left: 20px; margin: 20px 0;';
+                newEntry.innerHTML = `
+                    <div style="color: var(--accent); font-weight: 600; margin-bottom: 5px;">${date}</div>
+                    <div style="color: rgba(255,255,255,0.9);">${description}</div>
+                `;
+                container.appendChild(newEntry);
+            }
+        }
+
+        // Dokument-Checkliste erstellen
+        function generateDocumentList() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            const checkboxes = document.querySelectorAll('#documents input[type="checkbox"]');
+            let list = '📋 Dokument-Checkliste\n\n';
+            
+            checkboxes.forEach(checkbox => {
+                const label = checkbox.nextElementSibling.textContent;
+                const status = checkbox.checked ? '✅' : '❌';
+                list += `${status} ${label}\n`;
+            });
+            
+            const blob = new Blob([list], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `dokument-checkliste-${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialisierung
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aktuelles Datum setzen
+            const today = new Date().toISOString().split('T')[0];
+            const now = new Date().toTimeString().split(' ')[0].substring(0, 5);
+            document.getElementById('entryDate').value = today;
+            document.getElementById('entryTime').value = now;
+            
+            // Gespeicherte Daten laden
+            loadProgress();
+            displayDiaryEntries();
+            loadContacts();
+            
+            // Checkbox Change Events
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.parentElement.classList.add('completed');
+                    } else {
+                        this.parentElement.classList.remove('completed');
+                    }
+                });
+            });
+        });
+
+        // iOS-spezifische Optimierungen
+        if (isIOS) {
+            // Verhindere Zoom bei Input-Focus
+            document.addEventListener('touchstart', function() {}, true);
+            
+            // Verbessere Scroll-Performance
+            document.body.style.webkitOverflowScrolling = 'touch';
+            
+            // Status Bar Handling
+            if (window.navigator.standalone) {
+                document.body.classList.add('standalone');
+            }
+        }
+
+        // Orientation Change Handler
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 500);
+        });
+
+        // Prevent Pull-to-Refresh
+        let startY = 0;
+        document.addEventListener('touchstart', e => {
+            startY = e.touches[0].pageY;
+        });
+
+        document.addEventListener('touchmove', e => {
+            const y = e.touches[0].pageY;
+            if (y > startY && window.pageYOffset === 0) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
+
