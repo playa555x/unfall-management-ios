@@ -811,7 +811,192 @@
             }
         }
 
-        /* Dark Mode Support */
+        /* Blockblatt-Design für Tagebucheinträge */
+        .diary-sheets {
+            position: relative;
+            min-height: 200px;
+        }
+
+        .diary-sheet {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.1),
+                0 2px 8px rgba(0,0,0,0.05),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #2c3e50;
+            transform: rotate(-0.5deg);
+            transition: all 0.3s ease;
+        }
+
+        .diary-sheet:nth-child(even) {
+            transform: rotate(0.3deg);
+        }
+
+        .diary-sheet:nth-child(3n) {
+            transform: rotate(-0.2deg);
+        }
+
+        .diary-sheet:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.15),
+                0 4px 12px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+
+        .diary-sheet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 40px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff6b6b 0%, #ff8e8e 100%);
+            border-radius: 1px;
+        }
+
+        .diary-sheet::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: repeating-linear-gradient(
+                transparent,
+                transparent 24px,
+                rgba(74, 144, 226, 0.1) 24px,
+                rgba(74, 144, 226, 0.1) 26px
+            );
+            pointer-events: none;
+            border-radius: 15px;
+        }
+
+        .diary-sheet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            margin-left: 50px;
+        }
+
+        .diary-sheet-date {
+            color: #4a90e2;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .diary-sheet-category {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .diary-sheet-title {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            margin-left: 50px;
+        }
+
+        .diary-sheet-content {
+            color: #34495e;
+            line-height: 1.6;
+            margin-left: 50px;
+            white-space: pre-wrap;
+            font-size: 1rem;
+        }
+
+        .diary-sheet-mood {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255,255,255,0.8);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 10px 0 10px 50px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .diary-sheet-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .diary-sheet-actions button {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .diary-sheet-actions button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .diary-sheet-timestamp {
+            color: #7f8c8d;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            margin-left: 50px;
+            font-style: italic;
+        }
+
+        .mood-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.9);
+            padding: 8px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .mood-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        .mood-btn.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .no-entries {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255,255,255,0.7);
+        }
         @media (prefers-color-scheme: dark) {
             :root {
                 --glass: rgba(255, 255, 255, 0.08);
@@ -1030,6 +1215,7 @@
         <nav class="nav-tabs">
             <div class="nav-tab active haptic-light" onclick="showTab('checklist')">✅ Checkliste</div>
             <div class="nav-tab haptic-light" onclick="showTab('diary')">📝 Tagebuch</div>
+            <div class="nav-tab haptic-light" onclick="showTab('medications')">💊 Medikamente</div>
             <div class="nav-tab haptic-light" onclick="showTab('voice')">🎤 Sprachnotizen</div>
             <div class="nav-tab haptic-light" onclick="showTab('photos')">📸 Fotos</div>
             <div class="nav-tab haptic-light" onclick="showTab('experts')">⚖️ Experten</div>
@@ -1136,10 +1322,35 @@
             <div class="card">
                 <h3>📝 Neuer Tagebucheintrag</h3>
                 <div style="margin-bottom: 15px;">
-                    <input type="date" id="entryDate" style="width: 100%; margin-bottom: 10px;">
-                    <input type="time" id="entryTime" style="width: 100%; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                        <input type="date" id="entryDate" style="width: 100%;">
+                        <input type="time" id="entryTime" style="width: 100%;">
+                    </div>
+                    <input type="text" id="entryTitle" placeholder="Titel (z.B. Arzttermin, Schmerzen, Befinden...)" style="width: 100%; margin-bottom: 10px;">
+                    <select id="entryCategory" style="width: 100%; margin-bottom: 10px;">
+                        <option value="">Kategorie wählen</option>
+                        <option value="Schmerzen">🩹 Schmerzen</option>
+                        <option value="Arzttermin">🏥 Arzttermin</option>
+                        <option value="Medikamente">💊 Medikamente</option>
+                        <option value="Befinden">😊 Befinden</option>
+                        <option value="Therapie">🏃‍♂️ Therapie</option>
+                        <option value="Unfall">🚗 Unfall</option>
+                        <option value="Sonstiges">📝 Sonstiges</option>
+                    </select>
                 </div>
-                <textarea id="entryText" placeholder="Beschreibe hier deine Symptome, Schmerzen oder wichtige Ereignisse..." style="width: 100%; height: 120px; margin-bottom: 15px; resize: vertical;"></textarea>
+                <textarea id="entryText" placeholder="Beschreibe hier deine Symptome, Schmerzen, wichtige Ereignisse oder Beobachtungen..." style="width: 100%; height: 120px; margin-bottom: 15px; resize: vertical;"></textarea>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="color: rgba(255,255,255,0.9); display: block; margin-bottom: 10px; font-weight: 600;">😊 Stimmung/Befinden:</label>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button type="button" class="mood-btn" data-mood="sehr-gut" onclick="selectMood(this)">😊 Sehr gut</button>
+                        <button type="button" class="mood-btn" data-mood="gut" onclick="selectMood(this)">🙂 Gut</button>
+                        <button type="button" class="mood-btn" data-mood="neutral" onclick="selectMood(this)">😐 Neutral</button>
+                        <button type="button" class="mood-btn" data-mood="schlecht" onclick="selectMood(this)">😞 Schlecht</button>
+                        <button type="button" class="mood-btn" data-mood="sehr-schlecht" onclick="selectMood(this)">😣 Sehr schlecht</button>
+                    </div>
+                </div>
+                
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <button class="btn haptic-medium" onclick="addDiaryEntry()">💾 Eintrag speichern</button>
                     <button class="btn btn-secondary haptic-light" onclick="clearDiaryForm()">🗑️ Leeren</button>
@@ -1148,40 +1359,165 @@
 
             <div class="card">
                 <h3>📖 Tagebucheinträge</h3>
-                <div id="diaryEntries">
-                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
-                        Noch keine Einträge vorhanden. Erstelle deinen ersten Eintrag oben.
-                    </p>
+                <div style="margin-bottom: 20px;">
+                    <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px;">
+                        <input type="text" id="searchEntries" placeholder="🔍 Einträge durchsuchen..." style="width: 100%;" oninput="filterDiaryEntries()">
+                        <select id="filterCategory" style="width: 150px;" onchange="filterDiaryEntries()">
+                            <option value="">Alle Kategorien</option>
+                            <option value="Schmerzen">🩹 Schmerzen</option>
+                            <option value="Arzttermin">🏥 Arzttermin</option>
+                            <option value="Medikamente">💊 Medikamente</option>
+                            <option value="Befinden">😊 Befinden</option>
+                            <option value="Therapie">🏃‍♂️ Therapie</option>
+                            <option value="Unfall">🚗 Unfall</option>
+                            <option value="Sonstiges">📝 Sonstiges</option>
+                        </select>
+                    </div>
                 </div>
+                
+                <div id="diaryEntries" class="diary-sheets">
+                    <div class="no-entries">
+                        <div style="text-align: center; padding: 40px; color: rgba(255,255,255,0.7);">
+                            <div style="font-size: 3rem; margin-bottom: 15px;">📔</div>
+                            <h4>Noch keine Einträge vorhanden</h4>
+                            <p>Beginnen Sie mit Ihrem ersten Tagebucheintrag!</p>
+                        </div>
+                    </div>
+                </div>
+                
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="btn export-btn haptic-medium" onclick="exportDiary()">📤 Tagebuch exportieren</button>
                 </div>
             </div>
+        </div>
 
+        <!-- Medikamente Tab -->
+        <div id="medications" class="tab-content">
             <div class="card">
-                <h3>💊 Medikamente verwalten</h3>
+                <h3>💊 Neues Medikament hinzufügen</h3>
                 <div style="margin-bottom: 20px;">
-                    <input type="text" id="medicationName" placeholder="Medikamentenname" style="width: 100%; margin-bottom: 10px;">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
-                        <input type="text" id="medicationDosage" placeholder="Dosierung (z.B. 500mg)">
-                        <input type="text" id="medicationFrequency" placeholder="Häufigkeit (z.B. 2x täglich)">
+                        <input type="text" id="medicationName" placeholder="Medikamentenname (z.B. Ibuprofen)" style="width: 100%;">
+                        <input type="text" id="medicationGeneric" placeholder="Wirkstoff (z.B. Ibuprofen)" style="width: 100%;">
                     </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" id="medicationDosage" placeholder="Dosierung (z.B. 400mg)">
+                        <select id="medicationForm" style="width: 100%;">
+                            <option value="">Form wählen</option>
+                            <option value="Tablette">Tablette</option>
+                            <option value="Kapsel">Kapsel</option>
+                            <option value="Tropfen">Tropfen</option>
+                            <option value="Salbe">Salbe</option>
+                            <option value="Spray">Spray</option>
+                            <option value="Injektion">Injektion</option>
+                            <option value="Pflaster">Pflaster</option>
+                            <option value="Zäpfchen">Zäpfchen</option>
+                        </select>
+                        <input type="text" id="medicationStrength" placeholder="Stärke (z.B. 20mg/ml)">
+                    </div>
+                    
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
                         <input type="date" id="medicationStart" placeholder="Startdatum">
                         <input type="date" id="medicationEnd" placeholder="Enddatum (optional)">
                     </div>
-                    <textarea id="medicationNotes" placeholder="Notizen (z.B. zu den Mahlzeiten, Nebenwirkungen...)" style="width: 100%; height: 60px; margin-bottom: 15px; resize: vertical;"></textarea>
-                    <button class="btn haptic-medium" onclick="addMedication()" style="width: 100%;">💊 Medikament hinzufügen</button>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" id="medicationPurpose" placeholder="Anwendungsgebiet (z.B. Schmerzen, Entzündung)" style="width: 100%; margin-bottom: 10px;">
+                        <input type="text" id="medicationDoctor" placeholder="Verschreibender Arzt" style="width: 100%; margin-bottom: 10px;">
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: rgba(255,255,255,0.9); display: block; margin-bottom: 10px; font-weight: 600;">⏰ Einnahmezeiten:</label>
+                        <div id="medicationTimes" style="margin-bottom: 10px;">
+                            <div style="display: flex; gap: 10px; margin-bottom: 5px; align-items: center;">
+                                <input type="time" style="flex: 1;">
+                                <select style="flex: 1;">
+                                    <option value="mit-essen">🍽️ Mit Essen</option>
+                                    <option value="ohne-essen">🚫 Ohne Essen</option>
+                                    <option value="vor-essen">⏰ Vor dem Essen</option>
+                                    <option value="nach-essen">🍽️ Nach dem Essen</option>
+                                    <option value="egal">➖ Egal</option>
+                                </select>
+                                <button type="button" onclick="removeMedicationTime(this)" style="background: var(--danger); color: white; border: none; padding: 8px 12px; border-radius: 8px;">🗑️</button>
+                            </div>
+                        </div>
+                        <button type="button" onclick="addMedicationTime()" class="btn btn-secondary haptic-light" style="width: 100%;">➕ Weitere Einnahmezeit</button>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: rgba(255,255,255,0.9); display: block; margin-bottom: 10px; font-weight: 600;">⚠️ Wechselwirkungen:</label>
+                        <textarea id="medicationInteractions" placeholder="Bekannte Wechselwirkungen mit anderen Medikamenten, Lebensmitteln oder Alkohol..." style="width: 100%; height: 60px; resize: vertical;"></textarea>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: rgba(255,255,255,0.9); display: block; margin-bottom: 10px; font-weight: 600;">🚫 Kontraindikationen:</label>
+                        <textarea id="medicationContraindications" placeholder="Gegenanzeigen, Allergien, Unverträglichkeiten..." style="width: 100%; height: 60px; resize: vertical;"></textarea>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: rgba(255,255,255,0.9); display: block; margin-bottom: 10px; font-weight: 600;">⚡ Mögliche Nebenwirkungen:</label>
+                        <textarea id="medicationSideEffects" placeholder="Bekannte oder erfahrene Nebenwirkungen..." style="width: 100%; height: 60px; resize: vertical;"></textarea>
+                    </div>
+                    
+                    <textarea id="medicationNotes" placeholder="Zusätzliche Notizen, Anweisungen, Beobachtungen..." style="width: 100%; height: 80px; margin-bottom: 15px; resize: vertical;"></textarea>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn haptic-medium" onclick="addMedication()" style="flex: 1;">💊 Medikament hinzufügen</button>
+                        <button class="btn btn-secondary haptic-light" onclick="clearMedicationForm()" style="flex: 0 0 auto;">🗑️ Leeren</button>
+                    </div>
                 </div>
-                
+            </div>
+
+            <div class="card">
+                <h3>📅 Heutige Medikamente</h3>
+                <div id="todayMedications">
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        Keine Medikamente für heute geplant.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💊 Meine Medikamente</h3>
                 <div id="medicationList">
                     <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
                         Noch keine Medikamente hinzugefügt.
                     </p>
                 </div>
-                
+            </div>
+
+            <div class="card">
+                <h3>📊 Einnahme-Statistiken</h3>
+                <div id="medicationStats" class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: var(--success);" id="takenToday">0</div>
+                        <div class="stat-label">Heute genommen</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: var(--warning);" id="missedToday">0</div>
+                        <div class="stat-label">Heute vergessen</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: var(--primary);" id="totalMedications">0</div>
+                        <div class="stat-label">Aktive Medikamente</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: var(--accent);" id="adherenceRate">0%</div>
+                        <div class="stat-label">Einnahme-Quote</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📈 Einnahme-Verlauf</h3>
+                <div id="medicationHistory">
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        Noch keine Einnahmen dokumentiert.
+                    </p>
+                </div>
                 <div style="text-align: center; margin-top: 20px;">
-                    <button class="btn export-btn haptic-medium" onclick="exportMedications()">📤 Medikamente exportieren</button>
+                    <button class="btn export-btn haptic-medium" onclick="exportMedicationData()">📤 Medikamentendaten exportieren</button>
                 </div>
             </div>
         </div>
