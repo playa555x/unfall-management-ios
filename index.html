@@ -1157,6 +1157,33 @@
                     <button class="btn export-btn haptic-medium" onclick="exportDiary()">📤 Tagebuch exportieren</button>
                 </div>
             </div>
+
+            <div class="card">
+                <h3>💊 Medikamente verwalten</h3>
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="medicationName" placeholder="Medikamentenname" style="width: 100%; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" id="medicationDosage" placeholder="Dosierung (z.B. 500mg)">
+                        <input type="text" id="medicationFrequency" placeholder="Häufigkeit (z.B. 2x täglich)">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                        <input type="date" id="medicationStart" placeholder="Startdatum">
+                        <input type="date" id="medicationEnd" placeholder="Enddatum (optional)">
+                    </div>
+                    <textarea id="medicationNotes" placeholder="Notizen (z.B. zu den Mahlzeiten, Nebenwirkungen...)" style="width: 100%; height: 60px; margin-bottom: 15px; resize: vertical;"></textarea>
+                    <button class="btn haptic-medium" onclick="addMedication()" style="width: 100%;">💊 Medikament hinzufügen</button>
+                </div>
+                
+                <div id="medicationList">
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        Noch keine Medikamente hinzugefügt.
+                    </p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn export-btn haptic-medium" onclick="exportMedications()">📤 Medikamente exportieren</button>
+                </div>
+            </div>
         </div>
 
         <!-- Sprachnotizen Tab -->
@@ -1881,20 +1908,220 @@ Die App funktioniert dann auch offline! 🚀`);
                 navigator.vibrate(200);
             }
             
-            const date = document.getElementById('entryDate').value;
-            const time = document.getElementById('entryTime').value;
-            const text = document.getElementById('entryText').value;
+            const date = document.getElementById('entryDate').value || new Date().toISOString().split('T')[0];
+            const time = document.getElementById('entryTime').value || new Date().toTimeString().split(' ')[0].substring(0, 5);
+            const text = document.getElementById('entryText').value.trim();
             
-            if (!date || !text) {
-                alert('Bitte fülle mindestens Datum und Text aus.');
+            if (!text) {
+                alert('Bitte geben Sie einen Tagebucheintrag ein.');
                 return;
             }
             
+            const entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
             const entry = {
                 id: Date.now(),
                 date: date,
-                time: time || '00:00',
+                time: time,
                 text: text,
+                timestamp: new Date().toISOString()
+            };
+            
+            entries.unshift(entry); // Neueste Einträge zuerst
+            localStorage.setItem('diaryEntries', JSON.stringify(entries));
+            
+            // Formular leeren
+            clearDiaryForm();
+            
+            // Einträge neu anzeigen
+            displayDiaryEntries();
+            
+            alert('Tagebucheintrag gespeichert! 📝');
+        }
+
+        function displayDiaryEntries() {
+            const entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
+            const container = document.getElementById('diaryEntries');
+            
+            if (entries.length === 0) {
+                container.innerHTML = `
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        Noch keine Einträge vorhanden. Erstelle deinen ersten Eintrag oben.
+                    </p>
+                `;
+                return;
+            }
+            
+            container.innerHTML = entries.map(entry => `
+                <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; margin-bottom: 15px; border-left: 4px solid var(--primary);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div style="color: var(--primary); font-weight: 600; font-size: 1rem;">
+                            📅 ${new Date(entry.date).toLocaleDateString('de-DE')} um ${entry.time}
+                        </div>
+                        <button onclick="deleteDiaryEntry(${entry.id})" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1.2rem;" title="Eintrag löschen">🗑️</button>
+                    </div>
+                    <div style="color: rgba(255,255,255,0.9); line-height: 1.5; white-space: pre-wrap;">
+                        ${entry.text}
+                    </div>
+                    <div style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 10px;">
+                        Erstellt: ${new Date(entry.timestamp).toLocaleString('de-DE')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function deleteDiaryEntry(entryId) {
+            if (confirm('Möchten Sie diesen Tagebucheintrag wirklich löschen?')) {
+                const entries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
+                const filteredEntries = entries.filter(entry => entry.id !== entryId);
+                localStorage.setItem('diaryEntries', JSON.stringify(filteredEntries));
+                
+                displayDiaryEntries();
+                
+                if (navigator.vibrate) {
+                    navigator.vibrate(100);
+                }
+                
+                alert('Tagebucheintrag gelöscht.');
+            }
+        }
+
+        function clearDiaryForm() {
+            document.getElementById('entryDate').value = '';
+            document.getElementById('entryTime').value = '';
+            document.getElementById('entryText').value = '';
+        }
+        // Medikamenten-Funktionen
+        function addMedication() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            const name = document.getElementById('medicationName').value.trim();
+            const dosage = document.getElementById('medicationDosage').value.trim();
+            const frequency = document.getElementById('medicationFrequency').value.trim();
+            const startDate = document.getElementById('medicationStart').value;
+            const endDate = document.getElementById('medicationEnd').value;
+            const notes = document.getElementById('medicationNotes').value.trim();
+            
+            if (!name) {
+                alert('Bitte geben Sie einen Medikamentennamen ein.');
+                return;
+            }
+            
+            const medications = JSON.parse(localStorage.getItem('medications') || '[]');
+            const medication = {
+                id: Date.now(),
+                name: name,
+                dosage: dosage,
+                frequency: frequency,
+                startDate: startDate,
+                endDate: endDate,
+                notes: notes,
+                timestamp: new Date().toISOString()
+            };
+            
+            medications.unshift(medication);
+            localStorage.setItem('medications', JSON.stringify(medications));
+            
+            // Formular leeren
+            clearMedicationForm();
+            
+            // Medikamente neu anzeigen
+            displayMedications();
+            
+            alert('Medikament hinzugefügt! 💊');
+        }
+
+        function displayMedications() {
+            const medications = JSON.parse(localStorage.getItem('medications') || '[]');
+            const container = document.getElementById('medicationList');
+            
+            if (medications.length === 0) {
+                container.innerHTML = `
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        Noch keine Medikamente hinzugefügt.
+                    </p>
+                `;
+                return;
+            }
+            
+            container.innerHTML = medications.map(med => {
+                const isActive = !med.endDate || new Date(med.endDate) >= new Date();
+                const statusColor = isActive ? 'var(--success)' : 'var(--warning)';
+                const statusText = isActive ? 'Aktiv' : 'Beendet';
+                
+                return `
+                    <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; margin-bottom: 15px; border-left: 4px solid ${statusColor};">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                            <div>
+                                <h4 style="color: white; margin: 0 0 5px 0; font-size: 1.1rem;">💊 ${med.name}</h4>
+                                <div style="color: ${statusColor}; font-weight: 600; font-size: 0.9rem;">${statusText}</div>
+                            </div>
+                            <button onclick="deleteMedication(${med.id})" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1.2rem;" title="Medikament löschen">🗑️</button>
+                        </div>
+                        
+                        ${med.dosage ? `<div style="color: rgba(255,255,255,0.9); margin-bottom: 5px;"><strong>Dosierung:</strong> ${med.dosage}</div>` : ''}
+                        ${med.frequency ? `<div style="color: rgba(255,255,255,0.9); margin-bottom: 5px;"><strong>Häufigkeit:</strong> ${med.frequency}</div>` : ''}
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 10px 0;">
+                            ${med.startDate ? `<div style="color: rgba(255,255,255,0.8);"><strong>Start:</strong><br>${new Date(med.startDate).toLocaleDateString('de-DE')}</div>` : ''}
+                            ${med.endDate ? `<div style="color: rgba(255,255,255,0.8);"><strong>Ende:</strong><br>${new Date(med.endDate).toLocaleDateString('de-DE')}</div>` : '<div style="color: rgba(255,255,255,0.8);"><strong>Ende:</strong><br>Unbegrenzt</div>'}
+                        </div>
+                        
+                        ${med.notes ? `<div style="color: rgba(255,255,255,0.8); margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;"><strong>Notizen:</strong><br>${med.notes}</div>` : ''}
+                        
+                        <div style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 10px;">
+                            Hinzugefügt: ${new Date(med.timestamp).toLocaleString('de-DE')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function deleteMedication(medicationId) {
+            if (confirm('Möchten Sie dieses Medikament wirklich löschen?')) {
+                const medications = JSON.parse(localStorage.getItem('medications') || '[]');
+                const filteredMedications = medications.filter(med => med.id !== medicationId);
+                localStorage.setItem('medications', JSON.stringify(filteredMedications));
+                
+                displayMedications();
+                
+                if (navigator.vibrate) {
+                    navigator.vibrate(100);
+                }
+                
+                alert('Medikament gelöscht.');
+            }
+        }
+
+        function clearMedicationForm() {
+            document.getElementById('medicationName').value = '';
+            document.getElementById('medicationDosage').value = '';
+            document.getElementById('medicationFrequency').value = '';
+            document.getElementById('medicationStart').value = '';
+            document.getElementById('medicationEnd').value = '';
+            document.getElementById('medicationNotes').value = '';
+        }
+
+        function exportMedications() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            const medications = JSON.parse(localStorage.getItem('medications') || '[]');
+            if (medications.length === 0) {
+                alert('Keine Medikamente zum Exportieren vorhanden.');
+                return;
+            }
+            
+            const blob = new Blob([JSON.stringify(medications, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `medikamente-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
                 timestamp: new Date().toISOString()
             };
             
@@ -2766,6 +2993,12 @@ Die App funktioniert dann wie eine native iPhone-App!`;
             
             // Fortschritt laden
             loadProgress();
+            
+            // Tagebucheinträge anzeigen
+            displayDiaryEntries();
+            
+            // Medikamente anzeigen
+            displayMedications();
             
             console.log('🎉 iPhone-optimierte Unfall-Management PWA geladen!');
         });
