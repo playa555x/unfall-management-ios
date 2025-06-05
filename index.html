@@ -8,6 +8,11 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     
+    <!-- iOS-spezifische URL-Behandlung -->
+    <link rel="canonical" href="https://playa555x.github.io/unfall-management-ios/">
+    <meta property="og:url" content="https://playa555x.github.io/unfall-management-ios/">
+    <meta name="apple-mobile-web-app-url" content="https://playa555x.github.io/unfall-management-ios/">
+    
     <!-- iOS-optimierte Meta-Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -605,6 +610,120 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* Sprachnotizen-spezifische Styles */
+        .voice-recorder {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid var(--glass-border);
+        }
+
+        .voice-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .record-btn {
+            background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .record-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        .record-btn.recording {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .voice-status {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .voice-timer {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .voice-entry {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .voice-entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .voice-entry-date {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .voice-entry-duration {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+        }
+
+        .voice-player {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .voice-player audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .voice-transcription {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
         /* Responsive Design für iPhone */
         @media screen and (max-width: 480px) {
             .container {
@@ -644,6 +763,17 @@
             .btn {
                 padding: 12px 20px;
                 font-size: 15px;
+            }
+
+            .voice-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .record-btn {
+                width: 70px;
+                height: 70px;
+                font-size: 28px;
             }
         }
 
@@ -687,6 +817,153 @@
                 --glass: rgba(255, 255, 255, 0.08);
                 --glass-border: rgba(255, 255, 255, 0.15);
             }
+        }
+
+        /* Dark Mode Klasse */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        body.dark-mode::before {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(30, 30, 60, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(60, 30, 60, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(30, 60, 80, 0.4) 0%, transparent 50%);
+        }
+
+        body.dark-mode .card,
+        body.dark-mode .nav-tabs,
+        body.dark-mode .header {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode input,
+        body.dark-mode textarea,
+        body.dark-mode select {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Foto-Galerie Styles */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .photo-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .photo-item:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .photo-category {
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Erweiterte Button-Styles */
+        .btn-photo {
+            background: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-photo:active {
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-gps {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0891b2 100%);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-gps:active {
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-dark-mode {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            box-shadow: 0 6px 20px rgba(55, 65, 81, 0.3);
+        }
+
+        .btn-dark-mode:active {
+            box-shadow: 0 8px 20px rgba(55, 65, 81, 0.4);
+        }
+
+        /* Statistiken-Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:active {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Erinnerungs-Styles */
+        .reminder-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .reminder-date {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .reminder-title {
+            color: white;
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        .reminder-message {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
         }
 
         /* Reduced Motion Support */
@@ -753,9 +1030,11 @@
         <nav class="nav-tabs">
             <div class="nav-tab active haptic-light" onclick="showTab('checklist')">✅ Checkliste</div>
             <div class="nav-tab haptic-light" onclick="showTab('diary')">📝 Tagebuch</div>
-            <div class="nav-tab haptic-light" onclick="showTab('documents')">📄 Dokumente</div>
-            <div class="nav-tab haptic-light" onclick="showTab('contacts')">📞 Kontakte</div>
-            <div class="nav-tab haptic-light" onclick="showTab('timeline')">⏱️ Timeline</div>
+            <div class="nav-tab haptic-light" onclick="showTab('voice')">🎤 Sprachnotizen</div>
+            <div class="nav-tab haptic-light" onclick="showTab('photos')">📸 Fotos</div>
+            <div class="nav-tab haptic-light" onclick="showTab('experts')">⚖️ Experten</div>
+            <div class="nav-tab haptic-light" onclick="showTab('compensation')">💰 Ansprüche</div>
+            <div class="nav-tab haptic-light" onclick="showTab('tools')">🔧 Tools</div>
         </nav>
 
         <!-- Checkliste Tab -->
@@ -876,6 +1155,438 @@
                 </div>
                 <div style="text-align: center; margin-top: 20px;">
                     <button class="btn export-btn haptic-medium" onclick="exportDiary()">📤 Tagebuch exportieren</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sprachnotizen Tab -->
+        <div id="voice" class="tab-content">
+            <div class="card">
+                <h3>🎤 Sprachnotizen aufnehmen</h3>
+                <div class="voice-recorder">
+                    <div class="voice-status" id="voiceStatus">Bereit für Aufnahme</div>
+                    <div class="voice-timer" id="voiceTimer">00:00</div>
+                    <div class="voice-controls">
+                        <button class="record-btn haptic-heavy" id="recordBtn" onclick="toggleRecording()">🎤</button>
+                        <button class="btn btn-secondary haptic-medium" id="stopBtn" onclick="stopRecording()" style="display: none;">⏹️ Stoppen</button>
+                        <button class="btn btn-secondary haptic-light" id="playBtn" onclick="playLastRecording()" style="display: none;">▶️ Abspielen</button>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <input type="text" id="voiceTitle" placeholder="Titel für die Sprachnotiz (optional)" style="width: 100%; margin-bottom: 10px;">
+                        <button class="btn haptic-medium" id="saveVoiceBtn" onclick="saveVoiceNote()" style="display: none;">💾 Sprachnotiz speichern</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎵 Gespeicherte Sprachnotizen</h3>
+                <div id="voiceEntries">
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        Noch keine Sprachnotizen vorhanden. Nimm deine erste Sprachnotiz oben auf.
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn export-btn haptic-medium" onclick="exportVoiceNotes()">📤 Sprachnotizen exportieren</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fotos Tab -->
+        <div id="photos" class="tab-content">
+            <div class="card">
+                <h3>📸 Unfallfotos aufnehmen</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <button class="btn btn-photo haptic-medium" onclick="takePhoto('vehicle')">🚗 Fahrzeugschäden</button>
+                    <button class="btn btn-photo haptic-medium" onclick="takePhoto('scene')">🛣️ Unfallstelle</button>
+                    <button class="btn btn-photo haptic-medium" onclick="takePhoto('documents')">📄 Dokumente</button>
+                    <button class="btn btn-photo haptic-medium" onclick="takePhoto('injuries')">🩹 Verletzungen</button>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-gps haptic-medium" onclick="saveAccidentLocation()">📍 Unfallort erfassen</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🖼️ Foto-Galerie</h3>
+                <div id="photoGallery" class="photo-gallery">
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px; grid-column: 1 / -1;">
+                        Noch keine Fotos aufgenommen. Nutzen Sie die Buttons oben, um Fotos zu machen.
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn export-btn haptic-medium" onclick="exportPhotos()">📤 Fotos exportieren</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Foto-Statistiken</h3>
+                <div id="photoStats" class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: var(--warning);" id="vehiclePhotoCount">0</div>
+                        <div class="stat-label">Fahrzeugschäden</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: var(--secondary);" id="scenePhotoCount">0</div>
+                        <div class="stat-label">Unfallstelle</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: var(--primary);" id="documentPhotoCount">0</div>
+                        <div class="stat-label">Dokumente</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="color: var(--danger);" id="injuryPhotoCount">0</div>
+                        <div class="stat-label">Verletzungen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Tab -->
+        <div id="tools" class="tab-content">
+            <div class="card">
+                <h3>🔧 Erweiterte Tools</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <button class="btn btn-dark-mode haptic-medium" onclick="toggleDarkMode()">🌙 Dark Mode umschalten</button>
+                    <button class="btn btn-secondary haptic-medium" onclick="requestNotificationPermission()">🔔 Benachrichtigungen aktivieren</button>
+                    <button class="btn btn-gps haptic-medium" onclick="getCurrentLocation()">📍 Standort aktualisieren</button>
+                    <button class="btn btn-secondary haptic-medium" onclick="addToHomeScreen()">📱 App installieren</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 App-Statistiken</h3>
+                <div id="appStats"></div>
+            </div>
+
+            <div class="card">
+                <h3>🔔 Erinnerungen verwalten</h3>
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="reminderTitle" placeholder="Erinnerungstitel (z.B. Arzttermin)" style="width: 100%; margin-bottom: 10px;">
+                    <textarea id="reminderMessage" placeholder="Nachricht..." style="width: 100%; height: 80px; margin-bottom: 10px; resize: vertical;"></textarea>
+                    <input type="datetime-local" id="reminderDate" style="width: 100%; margin-bottom: 15px;">
+                    <button class="btn haptic-medium" onclick="createReminder()" style="width: 100%;">⏰ Erinnerung erstellen</button>
+                </div>
+                
+                <div id="remindersList">
+                    <p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        Noch keine Erinnerungen erstellt.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💾 Daten-Management</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <button class="btn export-btn haptic-medium" onclick="exportAllData()">📤 Alle Daten exportieren</button>
+                    <button class="btn btn-secondary haptic-medium" onclick="importData()">📥 Daten importieren</button>
+                    <button class="btn btn-danger haptic-heavy" onclick="clearAllData()">🗑️ Alle Daten löschen</button>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">ℹ️ Datenschutz-Info</h4>
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.4;">
+                        Alle Ihre Daten werden ausschließlich lokal auf Ihrem iPhone gespeichert. 
+                        Keine Daten werden an externe Server übertragen. Sie haben die volle Kontrolle über Ihre Informationen.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📞 Kontakte</h3>
+                <div style="display: grid; gap: 15px;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                        <strong style="color: white;">🚨 Notruf</strong><br>
+                        <span style="color: rgba(255,255,255,0.8);">Polizei: 110 | Rettung: 112</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                        <strong style="color: white;">🏥 Meine Versicherung</strong><br>
+                        <input type="text" placeholder="Name der Versicherung" style="width: 100%; margin: 5px 0;">
+                        <input type="tel" placeholder="Telefonnummer" style="width: 100%; margin: 5px 0;">
+                        <input type="text" placeholder="Versicherungsnummer" style="width: 100%; margin: 5px 0;">
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                        <strong style="color: white;">⚖️ Mein Anwalt</strong><br>
+                        <input type="text" placeholder="Name des Anwalts" style="width: 100%; margin: 5px 0;">
+                        <input type="tel" placeholder="Telefonnummer" style="width: 100%; margin: 5px 0;">
+                        <input type="email" placeholder="E-Mail" style="width: 100%; margin: 5px 0;">
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                        <strong style="color: white;">🏥 Mein Arzt</strong><br>
+                        <input type="text" placeholder="Name des Arztes" style="width: 100%; margin: 5px 0;">
+                        <input type="tel" placeholder="Telefonnummer" style="width: 100%; margin: 5px 0;">
+                        <input type="text" placeholder="Adresse" style="width: 100%; margin: 5px 0;">
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn haptic-medium" onclick="saveContacts()">💾 Kontakte speichern</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>⏱️ Timeline</h3>
+                <div id="timelineEntries">
+                    <div style="border-left: 3px solid var(--primary); padding-left: 20px; margin: 20px 0;">
+                        <div style="color: var(--primary); font-weight: 600; margin-bottom: 5px;">Tag 0 - Unfalltag</div>
+                        <div style="color: rgba(255,255,255,0.9);">
+                            • Unfall ereignet sich<br>
+                            • Sofortmaßnahmen einleiten<br>
+                            • Dokumentation beginnen
+                        </div>
+                    </div>
+                    <div style="border-left: 3px solid var(--warning); padding-left: 20px; margin: 20px 0;">
+                        <div style="color: var(--warning); font-weight: 600; margin-bottom: 5px;">Tag 1-7 - Erste Woche</div>
+                        <div style="color: rgba(255,255,255,0.9);">
+                            • Versicherung informieren<br>
+                            • Ärztliche Untersuchung<br>
+                            • Kostenvoranschläge einholen
+                        </div>
+                    </div>
+                    <div style="border-left: 3px solid var(--success); padding-left: 20px; margin: 20px 0;">
+                        <div style="color: var(--success); font-weight: 600; margin-bottom: 5px;">Woche 2-4 - Abwicklung</div>
+                        <div style="color: rgba(255,255,255,0.9);">
+                            • Schadenregulierung<br>
+                            • Reparaturen durchführen<br>
+                            • Nachbehandlung
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn haptic-medium" onclick="addTimelineEntry()">➕ Eintrag hinzufügen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experten Tab -->
+        <div id="experts" class="tab-content">
+            <div class="card">
+                <h3>⚖️ Top Kanzleien für Personenschadensrecht</h3>
+                
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 4px solid var(--primary);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <div>
+                            <h4 style="color: white; margin: 0 0 5px 0; font-size: 1.1rem;">Schah Sedi & Schah Sedi</h4>
+                            <p style="color: var(--primary); margin: 0; font-weight: 600;">📍 Berlin</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="background: var(--success); color: white; padding: 4px 8px; border-radius: 8px; font-size: 0.8rem;">⭐ Top-Referenz</span>
+                        </div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.9); margin: 10px 0;"><strong>Spezialisierung:</strong> Personenschäden, Schmerzensgeld</p>
+                    <p style="color: var(--warning); margin: 0; font-weight: 600;">💰 Referenz: 3,2 Mio.€ in Querschnittsfall</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 4px solid var(--accent);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <div>
+                            <h4 style="color: white; margin: 0 0 5px 0; font-size: 1.1rem;">Wittig Ünalp</h4>
+                            <p style="color: var(--accent); margin: 0; font-weight: 600;">📍 Hannover, Bremen + 6 weitere</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="background: var(--accent); color: white; padding: 4px 8px; border-radius: 8px; font-size: 0.8rem;">🏢 Großkanzlei</span>
+                        </div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.9); margin: 10px 0;"><strong>Spezialisierung:</strong> Versicherungsrecht</p>
+                    <p style="color: var(--accent); margin: 0; font-weight: 600;">🏢 Besonderheit: Großkanzlei mit mehreren Standorten</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🩺 Empfohlene unabhängige Gutachter</h3>
+                
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 4px solid var(--success);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <div>
+                            <h4 style="color: white; margin: 0 0 5px 0; font-size: 1.1rem;">Dr. med. Sebastian Apostel</h4>
+                            <p style="color: var(--success); margin: 0; font-weight: 600;">📍 Berlin</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="background: var(--success); color: white; padding: 4px 8px; border-radius: 8px; font-size: 0.8rem;">🩺 Facharzt</span>
+                        </div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0;"><strong>Fachbereich:</strong> Orthopädie & Unfallchirurgie</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 4px solid var(--warning);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                        <div>
+                            <h4 style="color: white; margin: 0 0 5px 0; font-size: 1.1rem;">Prof. Dr. med. W. H. M. Castro</h4>
+                            <p style="color: var(--warning); margin: 0; font-weight: 600;">📍 Münster</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <span style="background: var(--warning); color: white; padding: 4px 8px; border-radius: 8px; font-size: 0.8rem;">👨‍🏫 Professor</span>
+                        </div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0;"><strong>Fachbereich:</strong> Orthopädie/Unfallchirurgie</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🚨 Wichtige Sofortmaßnahmen</h3>
+                <ul class="checklist">
+                    <li>
+                        <input type="checkbox" id="immediate1">
+                        <label for="immediate1"><strong>Polizei informiert:</strong> Bei Personenschaden immer Polizei (110)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="immediate2">
+                        <label for="immediate2"><strong>Ärztliche Versorgung:</strong> Notarzt/Krankenhaus - alle Verletzungen dokumentieren</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="immediate3">
+                        <label for="immediate3"><strong>Unfallstelle dokumentieren:</strong> Fotos, Zeugen, Unfallbericht</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="immediate4">
+                        <label for="immediate4"><strong>Sofortige Meldungen:</strong> Arbeitgeber, Berufsgenossenschaft (bei Arbeitsunfall)</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>📋 Nächste kritische Schritte</h3>
+                <ul class="checklist">
+                    <li>
+                        <input type="checkbox" id="critical1">
+                        <label for="critical1">Private Unfallversicherung melden (sofort, spätestens binnen weniger Tage)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="critical2">
+                        <label for="critical2">Krankenversicherung über Unfall informieren (Unfallkennzeichnung)</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="critical3">
+                        <label for="critical3">Fachanwalt für Personenschadensrecht kontaktieren</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="critical4">
+                        <label for="critical4">Alle medizinischen Unterlagen sammeln und sichern</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Ansprüche Tab -->
+        <div id="compensation" class="tab-content">
+            <div class="card">
+                <h3>💰 Übersicht der möglichen Geldleistungen</h3>
+                
+                <div style="overflow-x: auto; margin: 20px 0;">
+                    <table style="width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: rgba(255,255,255,0.1);">
+                                <th style="padding: 15px; text-align: left; color: var(--primary); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);">Quelle / Anspruch</th>
+                                <th style="padding: 15px; text-align: left; color: var(--primary); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);">Typ</th>
+                                <th style="padding: 15px; text-align: left; color: var(--primary); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);">Höhe (Beispiel)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 15px; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.05);">Private Unfallversicherung</td>
+                                <td style="padding: 15px; color: var(--warning); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">Einmalig</td>
+                                <td style="padding: 15px; color: var(--success); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">100-350% der Grundsumme</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.05);">Schmerzensgeld</td>
+                                <td style="padding: 15px; color: var(--warning); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">Einmalig</td>
+                                <td style="padding: 15px; color: var(--success); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">100.000-750.000€</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.05);">Verdienstausfall</td>
+                                <td style="padding: 15px; color: var(--accent); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">Rente/Kapital</td>
+                                <td style="padding: 15px; color: var(--success); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">Voller Einkommensverlust</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; color: rgba(255,255,255,0.9); border-bottom: 1px solid rgba(255,255,255,0.05);">Erwerbsminderungsrente</td>
+                                <td style="padding: 15px; color: var(--accent); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">Monatlich</td>
+                                <td style="padding: 15px; color: var(--success); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.05);">~978€ Durchschnitt</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px; color: rgba(255,255,255,0.9);">Pflegegeld</td>
+                                <td style="padding: 15px; color: var(--accent); font-weight: 600;">Monatlich</td>
+                                <td style="padding: 15px; color: var(--success); font-weight: 600;">PG3: 545€, PG5: 901€</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📈 Verfahrensfortschritt</h3>
+                <div style="text-align: center; margin: 20px 0;">
+                    <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 20px;">
+                        Beginnen Sie mit der ersten Unfallmeldung
+                    </p>
+                    <button class="btn haptic-medium" onclick="startClaimProcess()">🚀 Ansprüche-Prozess starten</button>
+                </div>
+                
+                <div id="claimProgress" style="display: none;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                        <h4 style="color: var(--primary); margin-bottom: 15px;">📋 Ihr Ansprüche-Fortschritt</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="claimProgressFill" style="width: 0%">0%</div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <ul class="checklist">
+                                <li>
+                                    <input type="checkbox" id="claim1" onchange="updateClaimProgress()">
+                                    <label for="claim1">Unfallmeldung bei Versicherung eingereicht</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="claim2" onchange="updateClaimProgress()">
+                                    <label for="claim2">Medizinische Dokumentation vollständig</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="claim3" onchange="updateClaimProgress()">
+                                    <label for="claim3">Anwalt für Personenschadensrecht beauftragt</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="claim4" onchange="updateClaimProgress()">
+                                    <label for="claim4">Gutachter für Schadensbewertung bestellt</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="claim5" onchange="updateClaimProgress()">
+                                    <label for="claim5">Schmerzensgeld-Anspruch geltend gemacht</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="claim6" onchange="updateClaimProgress()">
+                                    <label for="claim6">Verdienstausfall dokumentiert und eingereicht</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💡 Ansprüche-Rechner</h3>
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: rgba(255,255,255,0.9); display: block; margin-bottom: 5px;">Monatliches Nettoeinkommen (€):</label>
+                        <input type="number" id="monthlyIncome" placeholder="z.B. 3000" style="width: 100%;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: rgba(255,255,255,0.9); display: block; margin-bottom: 5px;">Arbeitsunfähigkeit (Tage):</label>
+                        <input type="number" id="daysOff" placeholder="z.B. 30" style="width: 100%;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="color: rgba(255,255,255,0.9); display: block; margin-bottom: 5px;">Schmerzintensität (1-10):</label>
+                        <input type="range" id="painLevel" min="1" max="10" value="5" style="width: 100%;">
+                        <div style="display: flex; justify-content: space-between; color: rgba(255,255,255,0.6); font-size: 0.8rem;">
+                            <span>Leicht</span>
+                            <span id="painValue">5</span>
+                            <span>Schwer</span>
+                        </div>
+                    </div>
+                    <button class="btn haptic-medium" onclick="calculateClaims()" style="width: 100%; margin-top: 15px;">🧮 Ansprüche berechnen</button>
+                    
+                    <div id="calculationResult" style="display: none; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                        <h4 style="color: var(--success); margin-bottom: 10px;">💰 Geschätzte Ansprüche:</h4>
+                        <div id="resultContent"></div>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 10px; font-style: italic;">
+                            * Dies sind Schätzwerte. Für eine genaue Bewertung konsultieren Sie einen Fachanwalt.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1003,10 +1714,18 @@
     </div>
 
     <script>
+        // Globale Variablen für Sprachaufnahme
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+        let recordingTimer;
+        let recordingStartTime;
+        let currentAudioBlob;
+
         // Service Worker registrieren
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
+                navigator.serviceWorker.register('/unfall-management-ios/service-worker.js')
                     .then(registration => {
                         console.log('SW registered: ', registration);
                     })
@@ -1253,32 +1972,825 @@ Die App funktioniert dann auch offline! 🚀`);
             URL.revokeObjectURL(url);
         }
 
-        // Kontakte speichern
+        // Sprachnotizen Funktionen
+        async function initializeVoiceRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    audio: {
+                        echoCancellation: true,
+                        noiseSuppression: true,
+                        autoGainControl: true,
+                        sampleRate: 44100
+                    } 
+                });
+                
+                mediaRecorder = new MediaRecorder(stream, {
+                    mimeType: 'audio/webm;codecs=opus'
+                });
+                
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        audioChunks.push(event.data);
+                    }
+                };
+                
+                mediaRecorder.onstop = () => {
+                    currentAudioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    audioChunks = [];
+                    
+                    // Buttons anzeigen
+                    document.getElementById('playBtn').style.display = 'inline-flex';
+                    document.getElementById('saveVoiceBtn').style.display = 'inline-flex';
+                    
+                    updateVoiceStatus('Aufnahme beendet. Bereit zum Speichern.');
+                };
+                
+                return true;
+            } catch (error) {
+                console.error('Fehler beim Zugriff auf Mikrofon:', error);
+                updateVoiceStatus('Mikrofon-Zugriff verweigert oder nicht verfügbar.');
+                return false;
+            }
+        }
+
+        async function toggleRecording() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            if (!isRecording) {
+                // Aufnahme starten
+                if (!mediaRecorder) {
+                    const initialized = await initializeVoiceRecording();
+                    if (!initialized) return;
+                }
+                
+                audioChunks = [];
+                mediaRecorder.start();
+                isRecording = true;
+                recordingStartTime = Date.now();
+                
+                // UI aktualisieren
+                document.getElementById('recordBtn').classList.add('recording');
+                document.getElementById('recordBtn').innerHTML = '⏸️';
+                document.getElementById('stopBtn').style.display = 'inline-flex';
+                document.getElementById('playBtn').style.display = 'none';
+                document.getElementById('saveVoiceBtn').style.display = 'none';
+                
+                updateVoiceStatus('Aufnahme läuft...');
+                startRecordingTimer();
+                
+            } else {
+                // Aufnahme pausieren/fortsetzen
+                if (mediaRecorder.state === 'recording') {
+                    mediaRecorder.pause();
+                    document.getElementById('recordBtn').innerHTML = '▶️';
+                    updateVoiceStatus('Aufnahme pausiert');
+                } else if (mediaRecorder.state === 'paused') {
+                    mediaRecorder.resume();
+                    document.getElementById('recordBtn').innerHTML = '⏸️';
+                    updateVoiceStatus('Aufnahme läuft...');
+                }
+            }
+        }
+
+        function stopRecording() {
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            if (mediaRecorder && isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+                clearInterval(recordingTimer);
+                
+                // UI zurücksetzen
+                document.getElementById('recordBtn').classList.remove('recording');
+                document.getElementById('recordBtn').innerHTML = '🎤';
+                document.getElementById('stopBtn').style.display = 'none';
+            }
+        }
+
+        function startRecordingTimer() {
+            recordingTimer = setInterval(() => {
+                const elapsed = Date.now() - recordingStartTime;
+                const minutes = Math.floor(elapsed / 60000);
+                const seconds = Math.floor((elapsed % 60000) / 1000);
+                document.getElementById('voiceTimer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function updateVoiceStatus(message) {
+            document.getElementById('voiceStatus').textContent = message;
+        }
+
+        function playLastRecording() {
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+            
+            if (currentAudioBlob) {
+                const audioUrl = URL.createObjectURL(currentAudioBlob);
+                const audio = new Audio(audioUrl);
+                audio.play();
+                
+                audio.onended = () => {
+                    URL.revokeObjectURL(audioUrl);
+                };
+            }
+        }
+
+        function saveVoiceNote() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            if (!currentAudioBlob) {
+                alert('Keine Aufnahme zum Speichern vorhanden.');
+                return;
+            }
+            
+            const title = document.getElementById('voiceTitle').value || 'Sprachnotiz';
+            const now = new Date();
+            
+            // Audio als Base64 speichern
+            const reader = new FileReader();
+            reader.onload = function() {
+                const voiceNote = {
+                    id: Date.now(),
+                    title: title,
+                    date: now.toISOString().split('T')[0],
+                    time: now.toTimeString().split(' ')[0].substring(0, 5),
+                    timestamp: now.toISOString(),
+                    audioData: reader.result,
+                    duration: document.getElementById('voiceTimer').textContent
+                };
+                
+                let voiceNotes = JSON.parse(localStorage.getItem('voiceNotes') || '[]');
+                voiceNotes.unshift(voiceNote);
+                localStorage.setItem('voiceNotes', JSON.stringify(voiceNotes));
+                
+                displayVoiceEntries();
+                clearVoiceForm();
+                
+                updateVoiceStatus('Sprachnotiz gespeichert!');
+            };
+            
+            reader.readAsDataURL(currentAudioBlob);
+        }
+
+        function clearVoiceForm() {
+            document.getElementById('voiceTitle').value = '';
+            document.getElementById('voiceTimer').textContent = '00:00';
+            document.getElementById('playBtn').style.display = 'none';
+            document.getElementById('saveVoiceBtn').style.display = 'none';
+            currentAudioBlob = null;
+            updateVoiceStatus('Bereit für Aufnahme');
+        }
+
+        function displayVoiceEntries() {
+            const voiceNotes = JSON.parse(localStorage.getItem('voiceNotes') || '[]');
+            const container = document.getElementById('voiceEntries');
+            
+            if (voiceNotes.length === 0) {
+                container.innerHTML = '<p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">Noch keine Sprachnotizen vorhanden. Nimm deine erste Sprachnotiz oben auf.</p>';
+                return;
+            }
+            
+            container.innerHTML = voiceNotes.map(note => `
+                <div class="voice-entry">
+                    <div class="voice-entry-header">
+                        <div>
+                            <div class="voice-entry-date">${new Date(note.date).toLocaleDateString('de-DE')} ${note.time}</div>
+                            <div style="color: white; font-weight: 600; margin-top: 5px;">${note.title}</div>
+                        </div>
+                        <div>
+                            <div class="voice-entry-duration">${note.duration}</div>
+                            <button onclick="deleteVoiceNote(${note.id})" style="background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 5px; font-size: 12px; margin-top: 5px;">🗑️</button>
+                        </div>
+                    </div>
+                    <div class="voice-player">
+                        <audio controls style="width: 100%;">
+                            <source src="${note.audioData}" type="audio/webm">
+                            Ihr Browser unterstützt keine Audio-Wiedergabe.
+                        </audio>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function deleteVoiceNote(id) {
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            if (confirm('Möchtest du diese Sprachnotiz wirklich löschen?')) {
+                let voiceNotes = JSON.parse(localStorage.getItem('voiceNotes') || '[]');
+                voiceNotes = voiceNotes.filter(note => note.id !== id);
+                localStorage.setItem('voiceNotes', JSON.stringify(voiceNotes));
+                displayVoiceEntries();
+            }
+        }
+
+        function exportVoiceNotes() {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
+            
+            const voiceNotes = JSON.parse(localStorage.getItem('voiceNotes') || '[]');
+            if (voiceNotes.length === 0) {
+                alert('Keine Sprachnotizen zum Exportieren vorhanden.');
+                return;
+            }
+            
+            // Erstelle ZIP-ähnliche Struktur (vereinfacht als JSON)
+            const exportData = {
+                exportDate: new Date().toISOString(),
+                totalNotes: voiceNotes.length,
+                notes: voiceNotes.map(note => ({
+                    title: note.title,
+                    date: note.date,
+                    time: note.time,
+                    duration: note.duration,
+                    audioData: note.audioData
+                }))
+            };
+            
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `sprachnotizen-export-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Ansprüche-Rechner Funktionen
+        function startClaimProcess() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            document.getElementById('claimProgress').style.display = 'block';
+            updateClaimProgress();
+        }
+
+        function updateClaimProgress() {
+            const checkboxes = document.querySelectorAll('#compensation input[type="checkbox"]');
+            const checked = document.querySelectorAll('#compensation input[type="checkbox"]:checked');
+            const progress = Math.round((checked.length / checkboxes.length) * 100);
+            
+            const progressFill = document.getElementById('claimProgressFill');
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+                progressFill.textContent = progress + '%';
+            }
+            
+            // Haptic Feedback
+            if (navigator.vibrate && checked.length > 0) {
+                navigator.vibrate(100);
+            }
+        }
+
+        function calculateClaims() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            const income = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+            const daysOff = parseInt(document.getElementById('daysOff').value) || 0;
+            const painLevel = parseInt(document.getElementById('painLevel').value) || 5;
+            
+            if (income === 0) {
+                alert('Bitte geben Sie Ihr monatliches Einkommen ein.');
+                return;
+            }
+            
+            // Berechnungen (vereinfacht, ohne externe APIs)
+            const dailyIncome = income / 30;
+            const lostIncome = dailyIncome * daysOff;
+            const painCompensation = painLevel * 5000; // Vereinfachte Berechnung
+            const totalClaim = lostIncome + painCompensation;
+            
+            const resultDiv = document.getElementById('calculationResult');
+            const contentDiv = document.getElementById('resultContent');
+            
+            contentDiv.innerHTML = `
+                <div style="margin-bottom: 10px;">
+                    <strong>Verdienstausfall:</strong> ${lostIncome.toLocaleString('de-DE', {style: 'currency', currency: 'EUR'})}
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <strong>Geschätztes Schmerzensgeld:</strong> ${painCompensation.toLocaleString('de-DE', {style: 'currency', currency: 'EUR'})}
+                </div>
+                <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px; margin-top: 10px;">
+                    <strong style="color: var(--success); font-size: 1.1rem;">Gesamtanspruch (geschätzt):</strong> 
+                    <span style="color: var(--success); font-size: 1.2rem; font-weight: 700;">${totalClaim.toLocaleString('de-DE', {style: 'currency', currency: 'EUR'})}</span>
+                </div>
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Pain Level Slider Update
+        document.addEventListener('DOMContentLoaded', () => {
+            const painSlider = document.getElementById('painLevel');
+            const painValue = document.getElementById('painValue');
+            
+            if (painSlider && painValue) {
+                painSlider.addEventListener('input', (e) => {
+                    painValue.textContent = e.target.value;
+                });
+            }
+        });
+
+        // 📸 Foto-Funktionalität (ohne externe APIs)
+        let photoStream = null;
+        let photoCategories = {
+            'vehicle': 'Fahrzeugschäden',
+            'scene': 'Unfallstelle', 
+            'documents': 'Dokumente',
+            'injuries': 'Verletzungen'
+        };
+
+        async function initCamera() {
+            try {
+                photoStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: 'environment',
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 }
+                    } 
+                });
+                return true;
+            } catch (error) {
+                console.error('Kamera-Zugriff fehlgeschlagen:', error);
+                return false;
+            }
+        }
+
+        async function takePhoto(category = 'scene') {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            // Vereinfachte Foto-Funktionalität ohne externe APIs
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.capture = 'environment';
+            
+            input.onchange = (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        savePhoto(e.target.result, category, file.name);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            
+            input.click();
+        }
+
+        function savePhoto(imageData, category, filename) {
+            const photos = JSON.parse(localStorage.getItem('accidentPhotos') || '[]');
+            const photo = {
+                id: Date.now(),
+                data: imageData,
+                category: category,
+                filename: filename,
+                timestamp: new Date().toISOString(),
+                location: getCurrentLocation()
+            };
+            
+            photos.unshift(photo);
+            localStorage.setItem('accidentPhotos', JSON.stringify(photos));
+            
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            alert(`Foto in Kategorie "${photoCategories[category]}" gespeichert!`);
+            displayPhotos();
+        }
+
+        function displayPhotos() {
+            const photos = JSON.parse(localStorage.getItem('accidentPhotos') || '[]');
+            // Foto-Anzeige implementieren (vereinfacht)
+            console.log(`${photos.length} Fotos gespeichert`);
+        }
+
+        // 📍 GPS-Funktionalität (ohne externe APIs)
+        let currentLocation = null;
+
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        currentLocation = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                            accuracy: position.coords.accuracy,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        // Location in localStorage speichern
+                        localStorage.setItem('accidentLocation', JSON.stringify(currentLocation));
+                        
+                        if (navigator.vibrate) {
+                            navigator.vibrate(100);
+                        }
+                    },
+                    (error) => {
+                        console.error('GPS-Fehler:', error);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 300000
+                    }
+                );
+            }
+            return currentLocation;
+        }
+
+        function saveAccidentLocation() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            getCurrentLocation();
+            alert('Unfallort wird erfasst...');
+        }
+
+        // 🌙 Dark Mode Support
+        function toggleDarkMode() {
+            const isDark = document.body.classList.contains('dark-mode');
+            
+            if (isDark) {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'false');
+            } else {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'true');
+            }
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+        }
+
+        function initDarkMode() {
+            const savedMode = localStorage.getItem('darkMode');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedMode === 'true' || (savedMode === null && prefersDark)) {
+                document.body.classList.add('dark-mode');
+            }
+        }
+
+        // 🔔 Erinnerungen und Notifications
+        function scheduleReminder(title, message, date) {
+            const reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
+            const reminder = {
+                id: Date.now(),
+                title: title,
+                message: message,
+                date: date,
+                completed: false,
+                timestamp: new Date().toISOString()
+            };
+            
+            reminders.push(reminder);
+            localStorage.setItem('reminders', JSON.stringify(reminders));
+            
+            // Vereinfachte Notification (ohne Service Worker)
+            if ('Notification' in window && Notification.permission === 'granted') {
+                const targetDate = new Date(date);
+                const now = new Date();
+                const timeDiff = targetDate.getTime() - now.getTime();
+                
+                if (timeDiff > 0) {
+                    setTimeout(() => {
+                        new Notification(title, {
+                            body: message,
+                            icon: '/unfall-management-ios/apple-touch-icon-180x180.png'
+                        });
+                    }, timeDiff);
+                }
+            }
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+        }
+
+        function requestNotificationPermission() {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        alert('Benachrichtigungen aktiviert!');
+                    }
+                });
+            }
+        }
+
+        // 📊 Erweiterte Datenvisualisierung
+        function generateProgressChart() {
+            const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+            const checked = document.querySelectorAll('#checklist input[type="checkbox"]:checked');
+            const progress = Math.round((checked.length / checkboxes.length) * 100);
+            
+            // Vereinfachte Chart-Darstellung ohne externe Libraries
+            const chartData = {
+                completed: checked.length,
+                total: checkboxes.length,
+                percentage: progress
+            };
+            
+            return chartData;
+        }
+
+        function displayStatistics() {
+            const stats = generateProgressChart();
+            const diaryEntries = JSON.parse(localStorage.getItem('diaryEntries') || '[]');
+            const voiceNotes = JSON.parse(localStorage.getItem('voiceNotes') || '[]');
+            const photos = JSON.parse(localStorage.getItem('accidentPhotos') || '[]');
+            
+            const statsHtml = `
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                    <h4 style="color: var(--primary); margin-bottom: 15px;">📊 Ihre Statistiken</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                        <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                            <div style="font-size: 2rem; color: var(--success);">${stats.percentage}%</div>
+                            <div style="color: rgba(255,255,255,0.8);">Fortschritt</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                            <div style="font-size: 2rem; color: var(--primary);">${diaryEntries.length}</div>
+                            <div style="color: rgba(255,255,255,0.8);">Tagebucheinträge</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                            <div style="font-size: 2rem; color: var(--accent);">${voiceNotes.length}</div>
+                            <div style="color: rgba(255,255,255,0.8);">Sprachnotizen</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                            <div style="font-size: 2rem; color: var(--warning);">${photos.length}</div>
+                            <div style="color: rgba(255,255,255,0.8);">Fotos</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return statsHtml;
+        }
+
+        // 📱 Erweiterte iPhone-Integration
+        function addToHomeScreen() {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
+            
+            const instructions = `📱 App zum Home-Bildschirm hinzufügen:
+
+1. Tippen Sie auf das Teilen-Symbol (⬆️) in Safari
+2. Scrollen Sie nach unten
+3. Wählen Sie "Zum Home-Bildschirm"
+4. Tippen Sie "Hinzufügen"
+
+Die App funktioniert dann wie eine native iPhone-App!`;
+            
+            alert(instructions);
+        }
+
+        function enableHapticFeedback() {
+            // Haptic Feedback für alle interaktiven Elemente
+            document.querySelectorAll('.haptic-light, .haptic-medium, .haptic-heavy').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    if (navigator.vibrate) {
+                        if (this.classList.contains('haptic-light')) {
+                            navigator.vibrate(50);
+                        } else if (this.classList.contains('haptic-medium')) {
+                            navigator.vibrate(100);
+                        } else if (this.classList.contains('haptic-heavy')) {
+                            navigator.vibrate(200);
+                        }
+                    }
+                });
+            });
+        }
+
+        // 🔧 Erweiterte Funktionen
+        function exportAllData() {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
+            
+            const allData = {
+                exportDate: new Date().toISOString(),
+                progress: JSON.parse(localStorage.getItem('unfallProgress') || '{}'),
+                diary: JSON.parse(localStorage.getItem('diaryEntries') || '[]'),
+                voice: JSON.parse(localStorage.getItem('voiceNotes') || '[]'),
+                contacts: JSON.parse(localStorage.getItem('contacts') || '{}'),
+                photos: JSON.parse(localStorage.getItem('accidentPhotos') || '[]'),
+                location: JSON.parse(localStorage.getItem('accidentLocation') || 'null'),
+                reminders: JSON.parse(localStorage.getItem('reminders') || '[]')
+            };
+            
+            const blob = new Blob([JSON.stringify(allData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `unfall-daten-komplett-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Erweiterte Funktionen für neue Features
+        function exportPhotos() {
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            }
+            
+            const photos = JSON.parse(localStorage.getItem('accidentPhotos') || '[]');
+            if (photos.length === 0) {
+                alert('Keine Fotos zum Exportieren vorhanden.');
+                return;
+            }
+            
+            const blob = new Blob([JSON.stringify(photos, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `unfall-fotos-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function updatePhotoStats() {
+            const photos = JSON.parse(localStorage.getItem('accidentPhotos') || '[]');
+            const stats = {
+                vehicle: photos.filter(p => p.category === 'vehicle').length,
+                scene: photos.filter(p => p.category === 'scene').length,
+                documents: photos.filter(p => p.category === 'documents').length,
+                injuries: photos.filter(p => p.category === 'injuries').length
+            };
+            
+            document.getElementById('vehiclePhotoCount').textContent = stats.vehicle;
+            document.getElementById('scenePhotoCount').textContent = stats.scene;
+            document.getElementById('documentPhotoCount').textContent = stats.documents;
+            document.getElementById('injuryPhotoCount').textContent = stats.injuries;
+        }
+
+        function createReminder() {
+            const title = document.getElementById('reminderTitle').value;
+            const message = document.getElementById('reminderMessage').value;
+            const date = document.getElementById('reminderDate').value;
+            
+            if (!title || !date) {
+                alert('Bitte füllen Sie mindestens Titel und Datum aus.');
+                return;
+            }
+            
+            scheduleReminder(title, message, date);
+            
+            // Felder leeren
+            document.getElementById('reminderTitle').value = '';
+            document.getElementById('reminderMessage').value = '';
+            document.getElementById('reminderDate').value = '';
+            
+            displayReminders();
+            alert('Erinnerung erstellt!');
+        }
+
+        function displayReminders() {
+            const reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
+            const container = document.getElementById('remindersList');
+            
+            if (reminders.length === 0) {
+                container.innerHTML = '<p style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">Noch keine Erinnerungen erstellt.</p>';
+                return;
+            }
+            
+            container.innerHTML = reminders.map(reminder => `
+                <div class="reminder-item">
+                    <div class="reminder-date">${new Date(reminder.date).toLocaleString('de-DE')}</div>
+                    <div class="reminder-title">${reminder.title}</div>
+                    <div class="reminder-message">${reminder.message}</div>
+                </div>
+            `).join('');
+        }
+
+        function clearAllData() {
+            if (confirm('Sind Sie sicher, dass Sie alle Daten löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.')) {
+                localStorage.clear();
+                alert('Alle Daten wurden gelöscht.');
+                location.reload();
+            }
+        }
+
+        function addTimelineEntry() {
+            const title = prompt('Titel des Timeline-Eintrags:');
+            const description = prompt('Beschreibung:');
+            
+            if (title && description) {
+                const timeline = JSON.parse(localStorage.getItem('timeline') || '[]');
+                timeline.push({
+                    id: Date.now(),
+                    title: title,
+                    description: description,
+                    date: new Date().toISOString(),
+                    timestamp: new Date().toLocaleString('de-DE')
+                });
+                
+                localStorage.setItem('timeline', JSON.stringify(timeline));
+                alert('Timeline-Eintrag hinzugefügt!');
+                
+                if (navigator.vibrate) {
+                    navigator.vibrate(200);
+                }
+            }
+        }
+
         function saveContacts() {
             if (navigator.vibrate) {
                 navigator.vibrate(200);
             }
             
+            const inputs = document.querySelectorAll('#tools input');
             const contacts = {
                 insurance: {
-                    name: document.querySelector('input[placeholder="Name der Versicherung"]').value,
-                    phone: document.querySelector('input[placeholder="Telefonnummer"]').value,
-                    number: document.querySelector('input[placeholder="Versicherungsnummer"]').value
+                    name: inputs[0].value,
+                    phone: inputs[1].value,
+                    number: inputs[2].value
                 },
                 lawyer: {
-                    name: document.querySelector('input[placeholder="Name des Anwalts"]').value,
-                    phone: document.querySelectorAll('input[placeholder="Telefonnummer"]')[1].value,
-                    email: document.querySelector('input[placeholder="E-Mail"]').value
+                    name: inputs[3].value,
+                    phone: inputs[4].value,
+                    email: inputs[5].value
                 },
                 doctor: {
-                    name: document.querySelector('input[placeholder="Name des Arztes"]').value,
-                    phone: document.querySelectorAll('input[placeholder="Telefonnummer"]')[2].value,
-                    address: document.querySelector('input[placeholder="Adresse"]').value
+                    name: inputs[6].value,
+                    phone: inputs[7].value,
+                    address: inputs[8].value
                 }
             };
             
             localStorage.setItem('contacts', JSON.stringify(contacts));
             alert('Kontakte erfolgreich gespeichert! 💾');
+        }
+
+        // Initialisierung erweitern
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dark Mode initialisieren
+            initDarkMode();
+            
+            // Haptic Feedback aktivieren
+            enableHapticFeedback();
+            
+            // Statistiken laden
+            updatePhotoStats();
+            
+            // App-Statistiken anzeigen
+            const appStatsContainer = document.getElementById('appStats');
+            if (appStatsContainer) {
+                appStatsContainer.innerHTML = displayStatistics();
+            }
+            
+            // Erinnerungen anzeigen
+            displayReminders();
+            
+            // Gespeicherte Kontakte laden
+            loadSavedContacts();
+            
+            // Fortschritt laden
+            loadProgress();
+            
+            console.log('🎉 iPhone-optimierte Unfall-Management PWA geladen!');
+        });
+
+        function loadSavedContacts() {
+            const contacts = JSON.parse(localStorage.getItem('contacts') || '{}');
+            const inputs = document.querySelectorAll('#tools input');
+            
+            if (contacts.insurance) {
+                if (inputs[0]) inputs[0].value = contacts.insurance.name || '';
+                if (inputs[1]) inputs[1].value = contacts.insurance.phone || '';
+                if (inputs[2]) inputs[2].value = contacts.insurance.number || '';
+            }
+            
+            if (contacts.lawyer) {
+                if (inputs[3]) inputs[3].value = contacts.lawyer.name || '';
+                if (inputs[4]) inputs[4].value = contacts.lawyer.phone || '';
+                if (inputs[5]) inputs[5].value = contacts.lawyer.email || '';
+            }
+            
+            if (contacts.doctor) {
+                if (inputs[6]) inputs[6].value = contacts.doctor.name || '';
+                if (inputs[7]) inputs[7].value = contacts.doctor.phone || '';
+                if (inputs[8]) inputs[8].value = contacts.doctor.address || '';
+            }
         }
 
         // Kontakte laden
@@ -1363,6 +2875,7 @@ Die App funktioniert dann auch offline! 🚀`);
             // Gespeicherte Daten laden
             loadProgress();
             displayDiaryEntries();
+            displayVoiceEntries();
             loadContacts();
             
             // Checkbox Change Events
